@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="<%= _.camelize(appname) %>">
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+    <link href="css/app.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Livereload script for development only (stripped during dist build) -->
+  <script src="http://localhost:35729/app/livereload.js" data-concat="false"></script>
+
+  <!-- JS from Bower Components -->
+  <script src="../bower_components/lodash/lodash.js"></script>
+  <script src="../bower_components/moment/moment.js"></script>
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="../bower_components/angular-resource/angular-resource.js"></script>
+  <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <!-- Add New Bower Component JS Above -->
+
+
+  <!-- Main App JS -->
+  <script src="app.js"></script>
+  <!-- Add New Component JS Above -->
+
+  <div>
+      <div class="jumbotron">
+          <h1>Runway</h1>
+          <p>Intelliware Development Inc.</p>
+      </div>
+
+      <div id="content" class="container">
+          <div ui-view></div>
+      </div>
+  </div>
+
+  <footer class="container">
+      <div class="row text-muted">
+          <div class="col-md-1">About</div>
+          <div class="col-md-1">FAQ</div>
+      </div>
+  </footer>
+
+</body>
+</html>

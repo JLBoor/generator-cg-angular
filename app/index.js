@@ -15,17 +15,12 @@ var CgangularGenerator = module.exports = function CgangularGenerator(args, opti
         this.config.set('serviceDirectory','service/');
         var inject = {
             js: {
-                file: 'index.html',
+                file: 'app/index.html',
                 marker: cgUtils.JS_MARKER,
                 template: '<script src="<%= filename %>"></script>'
-            },
-            less: {
-                relativeToModule: true,
-                file: '<%= module %>.less',
-                marker: cgUtils.LESS_MARKER,
-                template: '@import "<%= filename %>";'
             }
         };
+
         this.config.set('inject',inject);
         this.config.save();
         this.installDependencies({ skipInstall: options['skip-install'] });
@@ -47,36 +42,15 @@ CgangularGenerator.prototype.askFor = function askFor() {
 
     this.prompt(prompts, function (props) {
         this.appname = props.appname;
+
+        this.uirouter = true;
+        this.routerJs = 'bower_components/angular-ui-router/release/angular-ui-router.js';
+        this.routerModuleName = 'ui.router';
+        this.routerViewDirective = 'ui-view';
+
         cb();
     }.bind(this));
-};
 
-CgangularGenerator.prototype.askForUiRouter = function askFor() {
-    var cb = this.async();
-
-    var prompts = [{
-        name: 'router',
-        type:'list',
-        message: 'Which router would you like to use?',
-        default: 0,
-        choices: ['Standard Angular Router','Angular UI Router']
-    }];
-
-    this.prompt(prompts, function (props) {
-        if (props.router === 'Angular UI Router') {
-            this.uirouter = true;
-            this.routerJs = 'bower_components/angular-ui-router/release/angular-ui-router.js';
-            this.routerModuleName = 'ui.router';
-            this.routerViewDirective = 'ui-view';
-        } else {
-            this.uirouter = false;
-            this.routerJs = 'bower_components/angular-route/angular-route.js';
-            this.routerModuleName = 'ngRoute';
-            this.routerViewDirective = 'ng-view';
-        }
-        this.config.set('uirouter',this.uirouter);
-        cb();
-    }.bind(this));
 };
 
 CgangularGenerator.prototype.app = function app() {

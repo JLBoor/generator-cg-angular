@@ -1,11 +1,8 @@
 {
-  "name": "generator-cg-angular",
+  "name": "generator-runway-angular",
   "version": "3.2.0",
   "description": "Yeoman Generator for Enterprise Angular projects.",
-  "keywords": [
-    "yeoman-generator",
-    "angular"
-  ],
+  "keywords": ["yeoman-generator", "angular"],
   "homepage": "https://github.com/cgross/generator-cg-angular",
   "bugs": "https://github.com/cgross/generator-cg-angular/issues",
   "author": {
@@ -24,7 +21,7 @@
   "dependencies": {
     "underscore": "~1.5",
     "underscore.string": "~2.3",
-    "yeoman-generator": "~0.16",
+    "yeoman-generator": "~0.18",
     "chalk": "~0.4.0",
     "ng-parse-module": "~0.1.0"
   },

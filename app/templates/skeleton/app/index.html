@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="<%= _.camelize(appname) %>">
+<html ng-app="runwayAngular">
 <head>
   <title></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
 <body>
 
   <!-- Livereload script for development only (stripped during dist build) -->
-  <script src="http://localhost:35729/app/livereload.js" data-concat="false"></script>
+  <script src="http://localhost:35729/livereload.js" data-concat="false"></script>
 
   <!-- JS from Bower Components -->
   <script src="../bower_components/lodash/lodash.js"></script>
@@ -21,17 +21,34 @@
   <!-- Add New Bower Component JS Above -->
 
 
+  <!-- Configuration -->
+  <script src="modules/configuration/auth-config.js"></script>
+  <script src="modules/configuration/rest-config.js"></script>
+  <script src="modules/configuration/state-config.js"></script>
+  <!-- Add New Runway Component Above -->
+
+
   <!-- Main App JS -->
+  <script src="modules/companies/companies-config.js"></script>
+  <script src="modules/companies/companies-rest-service.js"></script>
+  <script src="modules/companies/list/companies-list-controller.js"></script>
+  <script src="modules/companies/details/companies-details-controller.js"></script>
+
+  <script src="modules/users/users-config.js"></script>
+  <script src="modules/users/users-rest-service.js"></script>
+  <script src="modules/users/list/users-list-controller.js"></script>
+  <script src="modules/users/details/users-details-controller.js"></script>
+
   <script src="app.js"></script>
   <!-- Add New Component JS Above -->
 
-  <div>
+  <div class="content">
       <div class="jumbotron">
           <h1>Runway</h1>
           <p>Intelliware Development Inc.</p>
       </div>
 
-      <div id="content" class="container">
+      <div class="container">
           <div ui-view></div>
       </div>
   </div>

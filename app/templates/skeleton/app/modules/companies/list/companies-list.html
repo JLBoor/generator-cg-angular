@@ -1,0 +1,31 @@
+<h2>
+    Company List
+
+    <a ui-sref="^.create" class="pull-right btn btn-sm btn-success">
+        <i class="glyphicon glyphicon-plus"></i>
+        Create
+    </a>
+</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="company in companies | orderBy:['!favorite', 'companyId']"
+            ng-class="{'warning': company.favorite }">
+            <td>{{company.name}}</td>
+            <td>{{company.contact.name.last}}, {{company.contact.name.first}}</td>
+            <td>{{company.contact.email}}</td>
+            <td class="text-right">
+                <a href="" ng-click="toggleFavorite(company)" class="glyphicon" ng-class="{'glyphicon-star-empty': !company.favorite, 'glyphicon-star': company.favorite}"></a>
+                <a ui-sref="^.edit({id: company._id})" class="glyphicon glyphicon-pencil"></a>
+            </td>
+        </tr>
+    </tbody>
+</table>

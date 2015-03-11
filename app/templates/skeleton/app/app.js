@@ -1,8 +1,18 @@
-angular.module('<%= _.camelize(appname) %>', ['ui.bootstrap','ui.router']);
+angular.module('runwayAngular', [
+    'ui.bootstrap',
+    'ui.router',
+    'authConfig',
+    'restConfig',
+    'stateConfig',
+    'companiesModule',
+    'usersModule'])
 
-angular.module('<%= _.camelize(appname) %>').config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/');
 
-});
-
+/**
+ * Configure rest URL
+ */
+    .config(function(restConfigServiceProvider) {
+        restConfigServiceProvider.setBaseUrl('/data');
+        restConfigServiceProvider.setLoginOperation('/data/login');
+    });

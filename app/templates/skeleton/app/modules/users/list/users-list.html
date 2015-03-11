@@ -1,0 +1,27 @@
+<h2>
+    User List
+
+    <a ui-sref="^.create" class="pull-right btn btn-sm btn-success">
+        <i class="glyphicon glyphicon-plus"></i>
+        Create
+    </a>
+</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in users | orderBy:'name'">
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td class="text-right">
+                <a ui-sref="^.edit({id: user.id})" class="glyphicon glyphicon-pencil"></a>
+            </td>
+        </tr>
+    </tbody>
+</table>

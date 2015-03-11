@@ -29,9 +29,7 @@ Then create your awesome app:
     cd MyNewAwesomeApp
     yo jb-angular
 
-Finally test:
-    `grunt serve`
-    open [http://localhost:9001/app/#/page/companies/list]()
+And finally, `grunt serve` and open [http://localhost:9001/app/#/page/companies/list](http://localhost:9001/app/#/page/companies/list)
 
 
 ## Resources

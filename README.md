@@ -8,29 +8,34 @@ This generator follows the [Angular Best Practices](http://jlboor.github.io/angu
 ## Getting Started
 
 
-**Prerequisites:** Node, Grunt, Yeoman, and Bower.  Once Node is installed, do:
+**Prerequisites:** Node, Grunt, Yeoman, and Bower.
+
+Once Node is installed, do:
+
     npm install -g grunt-cli yo bower
 
 
-**To create a project:**
+**Create a project:**
 
 First, clone this repository *(this step will go away as soon as we are on bower)*
-    `git clone git@github.com:JLBoor/generator-jb-angular.git`
-    `cd generator-jb-angular`
-    `npm link`
+
+    git clone git@github.com:JLBoor/generator-jb-angular.git
+    cd generator-jb-angular
+    npm link
 
 Then create your awesome app:
-    `mkdir MyNewAwesomeApp`
-    `cd MyNewAwesomeApp`
-    `yo jb-angular`
+
+    mkdir MyNewAwesomeApp
+    cd MyNewAwesomeApp
+    yo jb-angular
 
 Finally test:
     `grunt serve`
-    http://localhost:9001/app/#/page/companies/list
+    open [http://localhost:9001/app/#/page/companies/list]()
 
 
 ## Resources
 - [cgross/generator-cg-angular](https://github.com/cgross/generator-cg-angular)
 - [JSON Generator](http://www.json-generator.com/)
-- [JSON placeholder](http://jsonplaceholder.typicode.com/)
+- [JSON Placeholder](http://jsonplaceholder.typicode.com/)
 

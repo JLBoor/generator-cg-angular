@@ -29,11 +29,15 @@ Then create your awesome app:
     cd MyNewAwesomeApp
     yo jb-angular
 
-And finally, `grunt serve` and open [http://localhost:9001/app/#/page/companies/list](http://localhost:9001/app/#/page/companies/list)
+And finally, `grunt sample` and open [http://localhost:9001/app/#/page/companies/list](http://localhost:9001/app/#/page/companies/list)
+
+Use the username `john.doe`
+
 
 
 ## Resources
 - [cgross/generator-cg-angular](https://github.com/cgross/generator-cg-angular)
 - [JSON Generator](http://www.json-generator.com/)
-- [JSON Placeholder](http://jsonplaceholder.typicode.com/)
+- [JSON Server](https://github.com/typicode/json-server)
+
 

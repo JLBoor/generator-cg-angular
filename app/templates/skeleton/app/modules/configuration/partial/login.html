@@ -8,14 +8,14 @@
             <div class="panel-body">
                 <form>
                     <div class="form-group">
-                        <input type="email" class="form-control" id="email" placeholder="Enter email">
+                        <input ng-model="user.username" type="text" class="form-control" id="username" placeholder="Enter username">
                     </div>
 
                     <div class="form-group">
                         <input type="password" class="form-control" id="password" placeholder="Enter password">
                     </div>
 
-                    <button type="button" class="center-block btn btn-success">
+                    <button ng-click="signIn(user.username)" type="button" class="center-block btn btn-success">
                         <i class="fa fa-sign-in"></i>
                     </button>
                 </form>

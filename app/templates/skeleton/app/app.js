@@ -13,6 +13,6 @@ angular.module('runwayAngular', [
  * Configure rest URL
  */
     .config(function(restConfigServiceProvider) {
-        restConfigServiceProvider.setBaseUrl('/data');
-        restConfigServiceProvider.setLoginOperation('/data/login');
+        restConfigServiceProvider.setBaseUrl('http://localhost:9002');
+        restConfigServiceProvider.setLoginOperation('/login?id=:id');
     });

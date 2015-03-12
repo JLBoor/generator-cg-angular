@@ -1,7 +1,7 @@
 angular.module('usersModule')
     .service('usersRestService', function($resource, restConfigService) {
 
-        var User = $resource('http://jsonplaceholder.typicode.com/users/:id');
+        var User = $resource(restConfigService.getOperation('/users/:id'));
 
         return {
 
@@ -22,7 +22,7 @@ angular.module('usersModule')
             },
 
             default: function() {
-                return User.get({id: 1}); // FIXME use your default user id
+                return User.get({id: 0});
             }
         };
     });

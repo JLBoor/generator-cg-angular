@@ -7598,3 +7598,10 @@ footer {
 .content {
   flex: 1;
 }
+.nav-main > li > a {
+  color: #555555;
+  font-size: 1.2em;
+}
+.nav-main > li > a:hover {
+  color: #428bca;
+}

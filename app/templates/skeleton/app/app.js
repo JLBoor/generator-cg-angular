@@ -1,4 +1,4 @@
-angular.module('runwayAngular', [
+angular.module('sampleApp', [
     'ui.bootstrap',
     'ui.router',
     'authConfig',

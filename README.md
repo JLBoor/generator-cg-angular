@@ -33,7 +33,8 @@ And finally, `grunt sample` and open [http://localhost:9001/app/#/page/companies
 
 Use the username `john.doe`
 
-
+## Generators
+For now, the sub-generators have been disabled. Only the app generator works.
 
 ## Resources
 - [cgross/generator-cg-angular](https://github.com/cgross/generator-cg-angular)

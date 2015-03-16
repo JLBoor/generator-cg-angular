@@ -71,12 +71,12 @@ angular.module('configuration.identity', [])
     })
 
     .config(function($stateProvider) {
-        $stateProvider.state('page.login', {
-            url: '/login',
-            controller: 'authenticationController',
-            templateUrl: 'modules/configuration/partial/login.html'
-        });
-
+        $stateProvider
+            .state('page.login', {
+                url: '/login',
+                controller: 'authenticationController',
+                templateUrl: 'modules/configuration/partial/login.html'
+            });
     })
 
     .run(function($rootScope, $state, authenticationService) {

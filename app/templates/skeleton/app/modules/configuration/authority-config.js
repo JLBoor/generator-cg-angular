@@ -15,10 +15,10 @@ angular.module('configuration.authority', ['configuration.identity'])
                 var identity = identityService.getIdentity();
                 var state = $state.get(stateId);
 
-                if(!identity || !state) { return false; }
+                if(!state) { return false; }
                 if(!state.data || !state.data.authorities) { return true; }
 
-                return identity.authorities && _.every(state.data.authorities, function(authority) {
+                return identity && identity.authorities && _.every(state.data.authorities, function(authority) {
                     return identity.authorities.indexOf(authority) !== -1;
                 });
             }
@@ -30,4 +30,16 @@ angular.module('configuration.authority', ['configuration.identity'])
 
         $rootScope.$hasAuthority = authorityService.hasAuthority;
 
+    })
+
+    .run(function($rootScope, $state, authorityService) {
+
+        $rootScope.$on('$stateChangeStart', function (event, toState) {
+
+            if(toState.name !== 'page.errors.403' && !authorityService.hasAuthority(toState.name)) {
+                $state.go('page.errors.403');
+                event.preventDefault();
+            }
+
+        });
     });

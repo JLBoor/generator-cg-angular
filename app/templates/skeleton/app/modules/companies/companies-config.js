@@ -10,7 +10,10 @@ angular.module('companiesModule', [])
             .state('page.companies', {
                 url: '/companies',
                 template: '<div ui-view></div>',
-                abstract: true
+                abstract: true,
+                data: {
+                    authorities: ['COMPANIES']
+                }
             })
 
             .state('page.companies.list', {
@@ -32,6 +35,9 @@ angular.module('companiesModule', [])
                     company: function($stateParams, companiesRestService) {
                         return companiesRestService.get($stateParams.id);
                     }
+                },
+                data: {
+                    authorities: ['COMPANIES.EDIT']
                 }
             })
 
@@ -43,6 +49,9 @@ angular.module('companiesModule', [])
                     company: function(companiesRestService) {
                         return companiesRestService.default();
                     }
+                },
+                data: {
+                    authorities: ['COMPANIES.CREATE']
                 }
 
             });

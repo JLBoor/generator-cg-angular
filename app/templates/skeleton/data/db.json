@@ -1,5 +1,95 @@
 {
-  "login": [ {"id": "john.doe"} ],
+  "me": [
+    {
+      "id": 0,
+      "identity": {
+        "id": 2,
+        "username": "users.edit",
+        "authorities": [
+          "USERS",
+          "USERS.EDIT"
+        ]
+      }
+    }
+  ],
+  "identities": [
+    {
+      "id": 0,
+      "username": "john.doe",
+      "authorities": [
+        "USERS",
+        "USERS.EDIT",
+        "USERS.CREATE",
+        "COMPANIES",
+        "COMPANIES.EDIT",
+        "COMPANIES.CREATE"
+      ]
+    },
+    {
+      "id": 1,
+      "username": "users",
+      "authorities": [
+        "USERS"
+      ]
+    },
+    {
+      "id": 2,
+      "username": "users.edit",
+      "authorities": [
+        "USERS",
+        "USERS.EDIT"
+      ]
+    },
+    {
+      "id": 3,
+      "username": "users.create",
+      "authorities": [
+        "USERS",
+        "USERS.CREATE"
+      ]
+    },
+    {
+      "id": 4,
+      "username": "users.all",
+      "authorities": [
+        "USERS",
+        "USERS.EDIT",
+        "USERS.CREATE"
+      ]
+    },
+    {
+      "id": 5,
+      "username": "companies",
+      "authorities": [
+        "COMPANIES"
+      ]
+    },
+    {
+      "id": 6,
+      "username": "companies.edit",
+      "authorities": [
+        "COMPANIES",
+        "COMPANIES.EDIT"
+      ]
+    },
+    {
+      "id": 7,
+      "username": "companies.create",
+      "authorities": [
+        "COMPANIES",
+        "COMPANIES.CREATE"
+      ]
+    },
+    {
+      "id": 8,
+      "username": "companies.all",
+      "authorities": [
+        "COMPANIES",
+        "COMPANIES.EDIT",
+        "COMPANIES.CREATE"
+      ]
+    }
+  ],
   "companies": [
     {
       "id": 0,
@@ -315,5 +405,6 @@
         "bs": "target end-to-end models"
       }
     }
-  ]
+  ],
+  "favicon.ico": []
 }

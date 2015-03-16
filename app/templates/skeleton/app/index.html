@@ -22,7 +22,8 @@
 
 
   <!-- Configuration -->
-  <script src="modules/configuration/auth-config.js"></script>
+  <script src="modules/configuration/authority-config.js"></script>
+  <script src="modules/configuration/identity-config.js"></script>
   <script src="modules/configuration/rest-config.js"></script>
   <script src="modules/configuration/state-config.js"></script>
   <!-- Add New Configuration Component Above -->
@@ -46,9 +47,15 @@
 
       <div class="jumbotron">
 
-          <ul class="nav nav-main nav-pills pull-right">
-              <li><a ui-sref="page.companies.list">Companies</a></li>
-              <li><a ui-sref="page.users.list">Users</a></li>
+          <ul class="nav navbar-nav navbar-right nav-main nav-pills pull-right">
+              <li><a ng-if="$hasAuthority('page.companies.list')" ui-sref="page.companies.list">Companies</a></li>
+              <li><a ng-if="$hasAuthority('page.users.list')" ui-sref="page.users.list">Users</a></li>
+              <li ng-if="$hasAuthority('page.home')" dropdown class="dropdown">
+                  <a dropdown-toggle="" href="" class="dropdown-toggle">John Doe <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Logout</a></li>
+                  </ul>
+              </li>
           </ul>
 
           <h1>Sample App</h1>
@@ -66,6 +73,7 @@
           <div class="col-md-1">FAQ</div>
       </div>
   </footer>
+
 
 </body>
 </html>

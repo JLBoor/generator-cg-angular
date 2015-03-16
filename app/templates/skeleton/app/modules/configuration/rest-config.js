@@ -1,14 +1,19 @@
-angular.module('restConfig', ['ngResource'])
+angular.module('configuration.rest', ['ngResource'])
 
     .provider('restConfigService', function() {
 
         var baseUrl = '/';
-        var loginOperation = '/login';
+        var identityOperation;
+        var authenticationOperation;
 
         var RestConfigService = function() {
 
-            this.getLoginOperation = function(operation) {
-                return baseUrl + loginOperation;
+            this.getAuthenticationOperation = function() {
+                return baseUrl + authenticationOperation;
+            };
+
+            this.getIdentityOperation = function() {
+                return baseUrl + identityOperation;
             };
 
             this.getOperation = function(operation) {
@@ -17,7 +22,8 @@ angular.module('restConfig', ['ngResource'])
         };
 
         this.setBaseUrl = function(url) { baseUrl = url; };
-        this.setLoginOperation = function(op) { loginOperation = op; };
+        this.setAuthenticationOperation = function(op) { authenticationOperation = op; };
+        this.setIdentityOperation = function(op) { identityOperation = op; };
 
         this.$get = [function() {
             return new RestConfigService();

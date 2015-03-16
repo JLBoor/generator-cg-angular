@@ -10,7 +10,10 @@ angular.module('usersModule', [])
             .state('page.users', {
                 url: '/users',
                 template: '<div ui-view></div>',
-                abstract: true
+                abstract: true,
+                data: {
+                    authorities: ['USERS']
+                }
             })
 
             .state('page.users.list', {
@@ -32,6 +35,9 @@ angular.module('usersModule', [])
                     user: function($stateParams, usersRestService) {
                         return usersRestService.get($stateParams.id).$promise;
                     }
+                },
+                data: {
+                    authorities: ['USERS.EDIT']
                 }
             })
 
@@ -43,6 +49,9 @@ angular.module('usersModule', [])
                     user: function(usersRestService) {
                         return usersRestService.default().$promise;
                     }
+                },
+                data: {
+                    authorities: ['USERS.CREATE']
                 }
 
             });

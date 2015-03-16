@@ -1,4 +1,4 @@
-angular.module('stateConfig', [])
+angular.module('configuration.state', [])
 
     .provider('STATE', function() {
 
@@ -12,6 +12,12 @@ angular.module('stateConfig', [])
 
         $stateProvider.state('page', {
             url: '/page',
+            abstract: true,
+            template: '<div ui-view></div>'
+        });
+
+        $stateProvider.state('page.errors', {
+            url: '/errors',
             abstract: true,
             template: '<div ui-view></div>'
         });

@@ -15,6 +15,7 @@
   <script src="../bower_components/lodash/lodash.js"></script>
   <script src="../bower_components/moment/moment.js"></script>
   <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="../bower_components/angular-resource/angular-resource.js"></script>
   <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -50,16 +51,17 @@
           <ul class="nav navbar-nav navbar-right nav-main nav-pills pull-right">
               <li><a ng-if="$hasAuthority('page.companies.list')" ui-sref="page.companies.list">Companies</a></li>
               <li><a ng-if="$hasAuthority('page.users.list')" ui-sref="page.users.list">Users</a></li>
-              <li ng-if="$hasAuthority('page.home')" dropdown class="dropdown">
-                  <a dropdown-toggle="" href="" class="dropdown-toggle">John Doe <span class="caret"></span></a>
+              <li dropdown class="dropdown" ng-controller="identityController" >
+                  <a ng-if="identity" dropdown-toggle="" href="" class="dropdown-toggle">{{identity.username}} <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Logout</a></li>
+                      <li><a ui-sref="page.logout">Logout</a></li>
                   </ul>
               </li>
           </ul>
 
           <h1>Sample App</h1>
           <p>AngularJS Best Practices</p>
+
       </div>
 
       <div class="container">

@@ -1,4 +1,16 @@
-angular.module('configuration.identity', [])
+angular.module('configuration.identity', ['ngCookies'])
+
+    .controller('identityController', function($scope, identityService) {
+
+        $scope.$on('authentication.login', function() {
+            $scope.identity = identityService.getIdentity();
+        });
+
+        $scope.$on('authentication.logout', function() {
+            delete $scope.identity;
+        });
+
+    })
 
     .service('identityService', function($q, $http, $resource, restConfigService) {
 
@@ -7,56 +19,67 @@ angular.module('configuration.identity', [])
 
         return {
 
+            getIdentity: function () {
+                return identity;
+            },
+
             update: function (newIdentity) {
                 identity = newIdentity;
                 return Identity.update({id: 0}, {identity: newIdentity}).$promise;
             },
 
-            getIdentity: function () {
-                return identity;
+            ping: function () {
+                return Identity.get({id: 0}).$promise.then(function(session) {
+                    if(!session.identity || !session.identity.id) { throw "INVALID SESSION"; }
+                    return identity = session.identity;
+                });
             },
 
             clear: function() {
-               identity = null;
+                return this.update(null);
             }
         };
     })
 
-    .service('authenticationService', function($q, $http, $resource, restConfigService, identityService) {
-
-        var isAuthenticated;
+    .service('authenticationService', function($q, $http, $resource, $cookies, $rootScope, restConfigService, identityService) {
 
         var Authentication = $resource(
             restConfigService.getAuthenticationOperation(), null, { 'update': { method:'PUT' } }
         );
 
+        var _loginEvent = function() { $rootScope.$broadcast('authentication.login'); };
+        var _logoutEvent = function() { $rootScope.$broadcast('authentication.logout'); };
+
         return {
 
-            authenticate: function(username) {
+            clear: function() {
+                delete $cookies.sessionId;
+                return identityService.clear().then(_logoutEvent);
+            },
 
-                isAuthenticated = null;
-                identityService.clear();
+            authenticate: function(username) {
 
                 return Authentication.query({username : username}).$promise
 
                     .then(function(sessions) {
                         if(!sessions || sessions.length !== 1) { throw "INVALID CREDENTIALS"; }
+
+                        $cookies.sessionId = 0;
+
                         return sessions[0];
                     })
 
                     .then(identityService.update)
-
-                    .then(function() {
-                        return isAuthenticated = true;
-                    });
+                    .then(_loginEvent);
             },
 
             isAuthenticated: function() {
-                var identity = identityService.getIdentity();
-                return $q.when(isAuthenticated || identity && this.authenticate(identity.username))
-                    .then(
-                        function(isAuth) { return isAuthenticated = isAuth; },
-                        function() { return isAuthenticated = false; });
+                return $q.when(identityService.getIdentity() || identityService.ping())
+                    .then(function(identity) {
+                        if(!identity) { return false; }
+                        _loginEvent();
+                        return true;
+                    }, function() { return false; });
             }
         };
     })
@@ -72,10 +95,20 @@ angular.module('configuration.identity', [])
 
     .config(function($stateProvider) {
         $stateProvider
+
             .state('page.login', {
                 url: '/login',
                 controller: 'authenticationController',
                 templateUrl: 'modules/configuration/partial/login.html'
+            })
+
+            .state('page.logout', {
+                url: '/logout',
+                resolve: {
+                    'logout':  function(authenticationService) {
+                        return authenticationService.clear();
+                }},
+                templateUrl: 'modules/configuration/partial/logout.html'
             });
     })
 

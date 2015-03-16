@@ -2,14 +2,7 @@
   "me": [
     {
       "id": 0,
-      "identity": {
-        "id": 2,
-        "username": "users.edit",
-        "authorities": [
-          "USERS",
-          "USERS.EDIT"
-        ]
-      }
+      "identity": 0
     }
   ],
   "identities": [

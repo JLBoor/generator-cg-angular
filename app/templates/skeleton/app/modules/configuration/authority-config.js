@@ -32,14 +32,15 @@ angular.module('configuration.authority', ['configuration.identity'])
 
     })
 
-    .run(function($rootScope, $state, authorityService) {
+    .run(function($rootScope, $state, authenticationService, authorityService) {
 
         $rootScope.$on('$stateChangeStart', function (event, toState) {
-
-            if(toState.name !== 'page.errors.403' && !authorityService.hasAuthority(toState.name)) {
-                $state.go('page.errors.403');
-                event.preventDefault();
-            }
+            authenticationService.isAuthenticated().then(function() {
+                if (toState.name !== 'page.errors.403' && !authorityService.hasAuthority(toState.name)) {
+                    $state.go('page.errors.403');
+                    event.preventDefault();
+                }
+            });
 
         });
     });

@@ -15,4 +15,22 @@ angular.module('sampleApp', [
         restConfigServiceProvider.setBaseUrl('http://localhost:9002');
         restConfigServiceProvider.setAuthenticationOperation('/identities/:id');
         restConfigServiceProvider.setIdentityOperation('/me/:id');
+    })
+
+/**
+ * Configure states
+ */
+    .config(function(stateConfigServiceProvider) {
+
+        var findHomeState = ['authorityService', function(authorityService) {
+
+            if(authorityService.hasAuthority('page.companies.list')) { return 'page.companies.list'; }
+            else if(authorityService.hasAuthority('page.users.list')) { return 'page.users.list'; }
+
+            return 'page.errors.403';
+        }];
+
+        stateConfigServiceProvider.setHomeState(findHomeState);
     });
+
+

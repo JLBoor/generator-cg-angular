@@ -2,7 +2,19 @@
   "me": [
     {
       "id": 0,
-      "identity": 0
+      "identity": {
+        "id": 0,
+        "username": "french",
+        "lang": "fr",
+        "authorities": [
+          "USERS",
+          "USERS.EDIT",
+          "USERS.CREATE",
+          "COMPANIES",
+          "COMPANIES.EDIT",
+          "COMPANIES.CREATE"
+        ]
+      }
     }
   ],
   "identities": [
@@ -81,6 +93,19 @@
         "COMPANIES.EDIT",
         "COMPANIES.CREATE"
       ]
+    },
+    {
+      "id": 0,
+      "username": "french",
+      "lang": "fr",
+      "authorities": [
+        "USERS",
+        "USERS.EDIT",
+        "USERS.CREATE",
+        "COMPANIES",
+        "COMPANIES.EDIT",
+        "COMPANIES.CREATE"
+      ]
     }
   ],
   "companies": [
@@ -97,8 +122,8 @@
         },
         "email": "karyn.porter@stelaecor.com"
       },
-      "name": "MARVANE",
-      "phone": "+1 (828) 533-2657"
+      "name": "MARVAME",
+      "phone": "+1 (828) 533-2655"
     },
     {
       "id": 1,
@@ -379,7 +404,7 @@
       "id": 10,
       "name": "Clementina DuBuque",
       "username": "Moriah.Stanton",
-      "email": "Rey.Padberg@karina.biz",
+      "email": "Rey.Padberg@karina.com",
       "address": {
         "street": "Kattie Turnpike",
         "suite": "Suite 198",

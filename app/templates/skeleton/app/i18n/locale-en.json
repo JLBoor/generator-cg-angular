@@ -1,0 +1,35 @@
+{
+    "CONFIG": {
+    },
+
+    "APP": {
+        "TITLE": "Sample App",
+        "SUB_TITLE": "AngularJS Best Practices",
+
+        "LANG": {
+            "FR": "French",
+            "EN": "English"
+        }
+    },
+
+    "AUTH": {
+        "LOGIN": "Sign-in",
+        "LOGOUT": "Logout"
+    },
+
+    "COMPANIES": {
+        "LINK": "Companies"
+    },
+
+    "USERS": {
+        "LINK": "Users"
+    },
+
+    "ABOUT": {
+        "LINK": "About"
+    },
+
+    "FAQ": {
+        "LINK": "FAQ"
+    }
+}

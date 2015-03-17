@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="sampleApp">
 <head>
-  <title></title>
+  <title translate>APP.TITLE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
     <link href="css/app.css" type="text/css" rel="stylesheet">
@@ -18,6 +18,8 @@
   <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="../bower_components/angular-resource/angular-resource.js"></script>
+  <script src="../bower_components/angular-translate/angular-translate.js"></script>
+  <script src="../bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
   <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <!-- Add New Bower Component JS Above -->
 
@@ -27,6 +29,7 @@
   <script src="modules/configuration/identity-config.js"></script>
   <script src="modules/configuration/rest-config.js"></script>
   <script src="modules/configuration/state-config.js"></script>
+  <script src="modules/configuration/translate-config.js"></script>
   <!-- Add New Configuration Component Above -->
 
 
@@ -49,21 +52,23 @@
       <div class="jumbotron">
 
           <ul class="nav navbar-nav navbar-right nav-main nav-pills pull-right">
-              <li><a ng-if="$hasAuthority('page.companies.list')" ui-sref="page.companies.list">Companies</a></li>
-              <li><a ng-if="$hasAuthority('page.users.list')" ui-sref="page.users.list">Users</a></li>
+              <li><a ng-if="$hasAuthority('page.companies.list')" ui-sref="page.companies.list" translate>COMPANIES.LINK</a></li>
+              <li><a ng-if="$hasAuthority('page.users.list')" ui-sref="page.users.list" translate>USERS.LINK</a></li>
               <li dropdown class="dropdown" ng-controller="identityController" >
                   <a ng-if="identity" dropdown-toggle="" href="" class="dropdown-toggle">
                       <i class="glyphicon glyphicon-user"></i>
                       {{identity.username}} <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu" role="menu">
-                      <li><a ui-sref="page.logout">Logout</a></li>
+                      <li><a ng-hide="isLang('fr')" ng-click="changeLang('fr')" translate>APP.LANG.FR</a></li>
+                      <li><a ng-hide="isLang('en')" ng-click="changeLang('en')" translate>APP.LANG.EN</a></li>
+                      <li><a ui-sref="page.logout" translate>AUTH.LOGOUT</a></li>
                   </ul>
               </li>
           </ul>
 
-          <h1>Sample App</h1>
-          <p>AngularJS Best Practices</p>
+          <h1 translate>APP.TITLE</h1>
+          <p translate>APP.SUB_TITLE</p>
 
       </div>
 
@@ -74,8 +79,8 @@
 
   <footer class="container">
       <div class="row text-muted">
-          <div class="col-md-1">About</div>
-          <div class="col-md-1">FAQ</div>
+          <div class="col-md-1" translate>ABOUT.LINK</div>
+          <div class="col-md-1" translate>FAQ.LINK</div>
       </div>
   </footer>
 

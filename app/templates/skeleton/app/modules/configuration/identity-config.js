@@ -2,11 +2,11 @@ angular.module('configuration.identity', ['ngCookies'])
 
     .controller('identityController', function($scope, identityService) {
 
-        $scope.$on('authentication.login', function() {
+        $scope.$on('auth.login', function() {
             $scope.identity = identityService.getIdentity();
         });
 
-        $scope.$on('authentication.logout', function() {
+        $scope.$on('auth.logout', function() {
             delete $scope.identity;
         });
 
@@ -50,8 +50,8 @@ angular.module('configuration.identity', ['ngCookies'])
             restConfigService.getAuthenticationOperation(), null, { 'update': { method:'PUT' } }
         );
 
-        var _loginEvent = function() { $rootScope.$broadcast('authentication.login'); };
-        var _logoutEvent = function() { $rootScope.$broadcast('authentication.logout'); };
+        var _loginEvent = function(identity) { $rootScope.$broadcast('auth.login', identity); };
+        var _logoutEvent = function() { $rootScope.$broadcast('auth.logout'); };
 
         return {
 
@@ -80,7 +80,7 @@ angular.module('configuration.identity', ['ngCookies'])
                 return $q.when(identityService.getIdentity() || identityService.ping())
                     .then(function(identity) {
                         if(!identity) { return false; }
-                        _loginEvent();
+                        _loginEvent(identity);
                         return true;
                     }, function() { return false; });
             }

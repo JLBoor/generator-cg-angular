@@ -1,0 +1,38 @@
+{
+    "CONFIG": {
+
+    },
+
+    "APP": {
+        "TITLE": "App Exemple",
+        "SUB_TITLE": "Meilleures pratiques pour AngularJS",
+
+        "LANG": {
+            "FR": "Français",
+            "EN": "Anglais"
+        }
+    },
+
+    "AUTH": {
+        "LOGIN": "Connexion",
+        "LOGOUT": "Déconnexion"
+    },
+
+    "COMPANIES": {
+        "LINK": "Societés"
+    },
+
+    "USERS": {
+        "LINK": "Utilisateurs"
+    },
+
+    "ABOUT": {
+        "LINK": "A Propos"
+    },
+
+    "FAQ": {
+        "LINK": "FAQ"
+    }
+}
+
+

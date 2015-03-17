@@ -52,7 +52,10 @@
               <li><a ng-if="$hasAuthority('page.companies.list')" ui-sref="page.companies.list">Companies</a></li>
               <li><a ng-if="$hasAuthority('page.users.list')" ui-sref="page.users.list">Users</a></li>
               <li dropdown class="dropdown" ng-controller="identityController" >
-                  <a ng-if="identity" dropdown-toggle="" href="" class="dropdown-toggle">{{identity.username}} <span class="caret"></span></a>
+                  <a ng-if="identity" dropdown-toggle="" href="" class="dropdown-toggle">
+                      <i class="glyphicon glyphicon-user"></i>
+                      {{identity.username}} <span class="caret"></span>
+                  </a>
                   <ul class="dropdown-menu" role="menu">
                       <li><a ui-sref="page.logout">Logout</a></li>
                   </ul>

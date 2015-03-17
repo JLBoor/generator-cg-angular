@@ -22,7 +22,7 @@ angular.module('usersModule', [])
                 controller: 'usersListController',
                 resolve: {
                     users: function(usersRestService) {
-                        return usersRestService.list().$promise;
+                        return usersRestService.list();
                     }
                 }
             })
@@ -33,7 +33,7 @@ angular.module('usersModule', [])
                 controller: 'usersDetailsController',
                 resolve: {
                     user: function($stateParams, usersRestService) {
-                        return usersRestService.get($stateParams.id).$promise;
+                        return usersRestService.get($stateParams.id);
                     }
                 },
                 data: {
@@ -47,7 +47,7 @@ angular.module('usersModule', [])
                 controller: 'usersDetailsController',
                 resolve: {
                     user: function(usersRestService) {
-                        return usersRestService.default().$promise;
+                        return usersRestService.default();
                     }
                 },
                 data: {

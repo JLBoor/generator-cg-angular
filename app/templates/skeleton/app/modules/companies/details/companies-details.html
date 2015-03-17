@@ -70,7 +70,7 @@
             <div class="pull-right">
                 <a ui-sref="page.companies.list" type="button" class="btn btn-sm btn-link">cancel</a>
                 <button ng-if="isEditing" ng-click="delete()" type="button" class="btn btn-sm btn-danger">Delete</button>
-                <button ng-click="save()" type="button" class="btn btn-sm btn-success">
+                <button ng-click="createOrUpdate()" type="button" class="btn btn-sm btn-success">
                     <small>{{ isEditing ? 'Update' : 'Create' }}</small>
                 </button>
             </div>

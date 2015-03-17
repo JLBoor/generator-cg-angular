@@ -17,13 +17,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="company in companies | orderBy:['!favorite', 'id']"
-            ng-class="{'warning': company.favorite }">
+        <tr ng-repeat="company in companies | orderBy:'id'">
             <td>{{company.name}}</td>
             <td>{{company.contact.name.last}}, {{company.contact.name.first}}</td>
             <td>{{company.contact.email}}</td>
             <td class="text-right">
-                <a href="" ng-click="toggleFavorite(company)" class="glyphicon" ng-class="{'glyphicon-star-empty': !company.favorite, 'glyphicon-star': company.favorite}"></a>
                 <a ui-sref="^.edit({id: company.id})" class="glyphicon glyphicon-pencil"></a>
             </td>
         </tr>

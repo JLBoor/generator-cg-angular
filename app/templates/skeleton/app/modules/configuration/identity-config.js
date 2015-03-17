@@ -30,7 +30,8 @@ angular.module('configuration.identity', ['ngCookies'])
 
             ping: function () {
                 return Identity.get({id: 0}).$promise.then(function(session) {
-                    if(!session.identity || !session.identity.id) { throw 'INVALID SESSION'; }
+
+                    if(!session.identity || !session.identity.username) { throw 'INVALID SESSION'; }
 
                     identity = session.identity;
                     return identity;

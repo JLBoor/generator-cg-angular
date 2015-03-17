@@ -17,8 +17,12 @@ angular.module('companiesModule')
                 return $http.get(listOperation + '/' + id).then(_processResponse);
             },
 
-            save: function(company) {
-                return $http[company._id ? 'put' : 'post'](listOperation, company);
+            create: function(company) {
+                return $http.post(listOperation, company);
+            },
+
+            update: function(company) {
+                return $http.put(listOperation + '/' + company.id, company);
             },
 
             delete: function(id) {

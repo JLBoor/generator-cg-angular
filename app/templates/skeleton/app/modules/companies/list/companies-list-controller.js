@@ -4,8 +4,4 @@ angular.module('companiesModule')
 
         $scope.companies = companies;
 
-        $scope.toggleFavorite = function(company) {
-            company.favorite = !company.favorite;
-        };
-
     });

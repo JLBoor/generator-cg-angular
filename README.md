@@ -31,7 +31,10 @@ Then create your awesome app:
 
 And finally, `grunt sample` and open [http://localhost:9001/app/#/page/companies/list](http://localhost:9001/app/#/page/companies/list)
 
-Use the username `john.doe`
+Use one of the following username
+    `john.doe`
+    `french`
+    `companies`
 
 ## Generators
 For now, the sub-generators have been disabled. Only the app generator works.

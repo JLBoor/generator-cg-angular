@@ -1,18 +1,18 @@
 <h2>
-    User List
+    {{ 'USERS.LIST_TITLE' | translate }}
 
     <a ui-sref="^.create" class="pull-right btn btn-sm btn-success">
         <i class="glyphicon glyphicon-plus"></i>
-        Create
+        {{ 'USERS.ACTION_CREATE' | translate }}
     </a>
 </h2>
 
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th class="text-right">Actions</th>
+            <th translate>USERS.PROPERTY_NAME</th>
+            <th translate>USERS.PROPERTY_EMAIL</th>
+            <th class="text-right" translate>COMMON.HEADER.ACTIONS</th>
         </tr>
     </thead>
     <tbody>

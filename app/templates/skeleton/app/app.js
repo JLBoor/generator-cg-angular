@@ -5,7 +5,7 @@ angular.module('sampleApp', [
     'configuration.identity',
     'configuration.rest',
     'configuration.state',
-    'configuration.translate',
+    'configuration.locale',
     'companiesModule',
     'usersModule'])
 

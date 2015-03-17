@@ -4,18 +4,18 @@
     <div class="col-md-4 col-md-offset-4">
 
         <div class="panel panel-default">
-            <div class="panel-heading">Login</div>
+            <div class="panel-heading" translate>AUTH.LOGIN.TITLE</div>
             <div class="panel-body">
                 <form>
                     <div class="form-group">
-                        <input ng-model="user.username" type="text" class="form-control" id="username" placeholder="Enter username">
+                        <input ng-model="user.username" type="text" class="form-control" id="username" placeholder="{{ 'AUTH.LOGIN.USERNAME' | translate }}">
                     </div>
 
                     <div class="form-group">
-                        <input type="password" class="form-control" id="password" placeholder="Enter password">
+                        <input type="password" class="form-control" id="password" placeholder="{{ 'AUTH.LOGIN.PASSWORD' | translate }}">
                     </div>
 
-                    <button ng-click="signIn(user.username)" type="button" class="center-block btn btn-success">
+                    <button ng-click="signIn(user.username)" type="button" class="center-block btn btn-success" title="{{ 'AUTH.LOGIN.ACTION' | translate }}">
                         <i class="fa fa-sign-in"></i>
                     </button>
                 </form>

@@ -1,4 +1,4 @@
-angular.module('configuration.translate', ['pascalprecht.translate'])
+angular.module('configuration.locale', ['pascalprecht.translate'])
 
     .config(function($translateProvider) {
 
@@ -13,15 +13,6 @@ angular.module('configuration.translate', ['pascalprecht.translate'])
 
     .run(function($rootScope, $translate) {
 
-        $rootScope.$on('auth.login', function(event, user) {
-            if(user && user.lang) { $translate.use(user.lang); }
-        });
-
-        $rootScope.$on('auth.logout', function() {
-            $rootScope.changeLang($translate.preferredLanguage());
-        });
-
-
         $rootScope.changeLang = function (langKey) {
             $translate.use(langKey);
         };
@@ -29,6 +20,14 @@ angular.module('configuration.translate', ['pascalprecht.translate'])
         $rootScope.isLang = function (langKey) {
             return langKey === $translate.use();
         };
+
+        $rootScope.$on('auth.login', function(event, user) {
+            if(user && user.lang) { $translate.use(user.lang); }
+        });
+
+        $rootScope.$on('auth.logout', function() {
+            $rootScope.changeLang($translate.preferredLanguage());
+        });
 
     });
 

@@ -1,7 +1,4 @@
 {
-    "CONFIG": {
-    },
-
     "APP": {
         "TITLE": "Sample App",
         "SUB_TITLE": "AngularJS Best Practices",
@@ -9,20 +6,74 @@
         "LANG": {
             "FR": "French",
             "EN": "English"
+        },
+
+        "ERROR": {
+            "403": {
+                "TITLE": "Access denied",
+                "MESSAGE": "Sorry, you're not authorized to access this page."
+            }
+        }
+    },
+
+    "COMMON": {
+        "HEADER": {
+            "ACTIONS": "Actions"
+        },
+
+        "MESSAGE": {
+            "AUTO_GENERATED": "Auto-generated"
         }
     },
 
     "AUTH": {
-        "LOGIN": "Sign-in",
-        "LOGOUT": "Logout"
+        "LOGIN": {
+            "TITLE": "Sign-in",
+            "PAGE": "Login page",
+            "USERNAME": "Enter username",
+            "PASSWORD": "Enter password",
+            "ACTION": "Sign-in"
+
+        },
+        "LOGOUT": {
+            "TITLE": "Logout",
+            "SUCCESS": "You are now logged out."
+
+        }
     },
 
     "COMPANIES": {
-        "LINK": "Companies"
+        "LINK": "Companies",
+
+        "LIST_TITLE": "Company List",
+
+        "PROPERTY_NAME": "Company Name",
+        "PROPERTY_CONTACT": "Contact",
+        "PROPERTY_EMAIL": "Email",
+        "PROPERTY_ID": "Company Id",
+        "PROPERTY_ADDRESS": "Address",
+        "PROPERTY_PHONE": "Phone",
+        "PROPERTY_LASTNAME": "Lastname",
+        "PROPERTY_FIRSTNAME": "Firstname",
+
+        "ACTION_CREATE": "Create",
+        "ACTION_CANCEL": "cancel",
+        "ACTION_UPDATE": "Delete",
+        "ACTION_DELETE": "Delete"
     },
 
     "USERS": {
-        "LINK": "Users"
+        "LINK": "Users",
+
+        "LIST_TITLE": "User List",
+
+        "PROPERTY_NAME": "Name",
+        "PROPERTY_EMAIL": "Email",
+
+        "ACTION_CREATE": "Create",
+        "ACTION_CANCEL": "cancel",
+        "ACTION_UPDATE": "Update",
+        "ACTION_DELETE": "Delete"
     },
 
     "ABOUT": {

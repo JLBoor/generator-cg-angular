@@ -1,8 +1,4 @@
 {
-    "CONFIG": {
-
-    },
-
     "APP": {
         "TITLE": "App Exemple",
         "SUB_TITLE": "Meilleures pratiques pour AngularJS",
@@ -10,20 +6,74 @@
         "LANG": {
             "FR": "Français",
             "EN": "Anglais"
+        },
+
+        "ERROR": {
+            "403": {
+                "TITLE": "Accès refusé",
+                "MESSAGE": "Désolé, vous n'êtes pas autorisé à accéder cette page."
+            }
+        }
+    },
+
+    "COMMON": {
+        "HEADER": {
+            "ACTIONS": "Actions"
+        },
+
+        "MESSAGE": {
+            "AUTO_GENERATED": "Généré automatiquement lors de la création"
         }
     },
 
     "AUTH": {
-        "LOGIN": "Connexion",
-        "LOGOUT": "Déconnexion"
+        "LOGIN": {
+            "TITLE": "Connexion",
+            "PAGE": "Page de connexion",
+            "USERNAME": "Entrez votre identifiant",
+            "PASSWORD": "Entrez votre mot de passe",
+            "ACTION": "Connexion"
+
+        },
+        "LOGOUT": {
+            "TITLE": "Déconnexion",
+            "SUCCESS": "Vous êtes maintenant déconnecté."
+
+        }
     },
 
     "COMPANIES": {
-        "LINK": "Societés"
+        "LINK": "Societés",
+
+        "LIST_TITLE": "Liste des societés",
+
+        "PROPERTY_NAME": "Nom",
+        "PROPERTY_CONTACT": "Contact",
+        "PROPERTY_EMAIL": "Courriel",
+        "PROPERTY_ID": "Id",
+        "PROPERTY_ADDRESS": "Adresse",
+        "PROPERTY_PHONE": "Téléphone",
+        "PROPERTY_LASTNAME": "Nom",
+        "PROPERTY_FIRSTNAME": "Prénom",
+
+        "ACTION_CREATE": "Créer",
+        "ACTION_CANCEL": "annuler",
+        "ACTION_UPDATE": "Mettre à jour",
+        "ACTION_DELETE": "Supprimer"
     },
 
     "USERS": {
-        "LINK": "Utilisateurs"
+        "LINK": "Utilisateurs",
+
+        "LIST_TITLE": "Liste des utilisateurs",
+
+        "PROPERTY_NAME": "Nom",
+        "PROPERTY_EMAIL": "Courriel",
+
+        "ACTION_CREATE": "Créer",
+        "ACTION_CANCEL": "annuler",
+        "ACTION_UPDATE": "Mettre à jour",
+        "ACTION_DELETE": "Supprimer"
     },
 
     "ABOUT": {

@@ -1,19 +1,19 @@
 <h2>
-    Company List
+    {{ 'COMPANIES.LIST_TITLE' |  translate }}
 
     <a ui-sref="^.create" class="pull-right btn btn-sm btn-success">
         <i class="glyphicon glyphicon-plus"></i>
-        Create
+        {{'COMPANIES.ACTION_CREATE' | translate}}
     </a>
 </h2>
 
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Contact</th>
-            <th>Email</th>
-            <th class="text-right">Actions</th>
+            <th translate>COMPANIES.PROPERTY_NAME</th>
+            <th translate>COMPANIES.PROPERTY_CONTACT</th>
+            <th translate>COMPANIES.PROPERTY_EMAIL</th>
+            <th class="text-right" translate>COMMON.HEADER.ACTIONS</th>
         </tr>
     </thead>
     <tbody>

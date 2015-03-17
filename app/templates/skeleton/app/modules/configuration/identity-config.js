@@ -30,8 +30,10 @@ angular.module('configuration.identity', ['ngCookies'])
 
             ping: function () {
                 return Identity.get({id: 0}).$promise.then(function(session) {
-                    if(!session.identity || !session.identity.id) { throw "INVALID SESSION"; }
-                    return identity = session.identity;
+                    if(!session.identity || !session.identity.id) { throw 'INVALID SESSION'; }
+
+                    identity = session.identity;
+                    return identity;
                 });
             },
 
@@ -62,7 +64,7 @@ angular.module('configuration.identity', ['ngCookies'])
                 return Authentication.query({username : username}).$promise
 
                     .then(function(sessions) {
-                        if(!sessions || sessions.length !== 1) { throw "INVALID CREDENTIALS"; }
+                        if(!sessions || sessions.length !== 1) { throw 'INVALID CREDENTIALS'; }
 
                         $cookies.sessionId = 0;
 
@@ -85,6 +87,7 @@ angular.module('configuration.identity', ['ngCookies'])
     })
 
     .controller('authenticationController', function($scope, $state, authenticationService) {
+
         $scope.signIn = function(username) {
             authenticationService.authenticate(username)
                 .then(function() {
@@ -94,6 +97,7 @@ angular.module('configuration.identity', ['ngCookies'])
     })
 
     .config(function($stateProvider) {
+
         $stateProvider
 
             .state('page.login', {

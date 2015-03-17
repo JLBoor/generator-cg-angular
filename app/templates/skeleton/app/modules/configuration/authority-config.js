@@ -27,13 +27,11 @@ angular.module('configuration.authority', ['configuration.identity'])
     })
 
     .run(function($rootScope, authorityService) {
-
         $rootScope.$hasAuthority = authorityService.hasAuthority;
 
     })
 
     .run(function($rootScope, $state, authenticationService, authorityService) {
-
         $rootScope.$on('$stateChangeStart', function (event, toState) {
             authenticationService.isAuthenticated().then(function() {
                 if (toState.name !== 'page.errors.403' && !authorityService.hasAuthority(toState.name)) {

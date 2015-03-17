@@ -11,7 +11,7 @@ angular.module('sampleApp', [
 /**
  * Configure rest URL
  */
-    .config(function(restConfigServiceProvider) {
+    .config(function(restConfigServiceProvider){
         restConfigServiceProvider.setBaseUrl('http://localhost:9002');
         restConfigServiceProvider.setAuthenticationOperation('/identities/:id');
         restConfigServiceProvider.setIdentityOperation('/me/:id');

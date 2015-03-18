@@ -51,7 +51,7 @@ module.exports = function (grunt) {
                     livereloadOnError: false,
                     spawn: false
                 },
-                files: [createFolderGlobs(['*.js','*.less','*.html']),'!_SpecRunner.html','!.grunt'],
+                files: [createFolderGlobs(['*.js','*.html']),'!_SpecRunner.html','!.grunt'],
                 tasks: [] //all the tasks are run dynamically during the watch event handler
             }
         },
@@ -74,9 +74,14 @@ module.exports = function (grunt) {
         less: {
             production: {
                 options: {
+                    paths: ["app/less/"],
+                    modifyVars: {
+                        "fa-font-path": "'fonts/font-awesome/'",
+                        "icon-font-path": "'fonts/bootstrap/'"
+                    }
                 },
                 files: {
-                    'temp/app.css': 'app.less'
+                    "temp/app.css": "app/less/app.less"
                 }
             }
         },
@@ -86,7 +91,8 @@ module.exports = function (grunt) {
                     module: pkg.name,
                     htmlmin:'<%= htmlmin.main.options %>'
                 },
-                src: [createFolderGlobs('*.html'),'!index.html','!_SpecRunner.html'],
+                cwd: 'app',
+                src: ['**/*.html','!index.html','!_SpecRunner.html'],
                 dest: 'temp/templates.js'
             }
         },
@@ -94,11 +100,9 @@ module.exports = function (grunt) {
             main: {
                 files: [
                     {src: ['img/**'], dest: 'dist/'},
-                    {src: ['bower_components/font-awesome/fonts/**'], dest: 'dist/',filter:'isFile',expand:true},
-                    {src: ['bower_components/bootstrap/fonts/**'], dest: 'dist/',filter:'isFile',expand:true}
-                    //{src: ['bower_components/angular-ui-utils/ui-utils-ieshiv.min.js'], dest: 'dist/'},
-                    //{src: ['bower_components/select2/*.png','bower_components/select2/*.gif'], dest:'dist/css/',flatten:true,expand:true},
-                    //{src: ['bower_components/angular-mocks/angular-mocks.js'], dest: 'dist/'}
+                    {cwd: 'app/', src: ['i18n/**'], dest: 'dist/', filter: 'isFile', expand: true},
+                    {cwd: 'bower_components/font-awesome/fonts/', src: ['**'], dest: 'dist/fonts/font-awesome',filter:'isFile',expand:true},
+                    {cwd: 'bower_components/bootstrap/fonts/', src: ['**'], dest: 'dist/fonts/bootstrap',filter:'isFile',expand:true}
                 ]
             }
         },
@@ -106,11 +110,11 @@ module.exports = function (grunt) {
             read: {
                 options: {
                     read:[
-                        {selector:'script[data-concat!="false"]',attribute:'src',writeto:'appjs'},
-                        {selector:'link[rel="stylesheet"][data-concat!="false"]',attribute:'href',writeto:'appcss'}
+                        {selector:'script[data-concat!="false"]',attribute:'src',writeto:'appjs',isPath:true},
+                        {selector:'link[rel="stylesheet"][data-concat!="false"]',attribute:'href',writeto:'appcss',isPath:true}
                     ]
                 },
-                src: 'index.html'
+                src: 'app/index.html'
             },
             update: {
                 options: {
@@ -120,13 +124,13 @@ module.exports = function (grunt) {
                         {selector:'head',html:'<link rel="stylesheet" href="app.full.min.css">'}
                     ]
                 },
-                src:'index.html',
+                src:'app/index.html',
                 dest: 'dist/index.html'
             }
         },
         cssmin: {
             main: {
-                src:['temp/app.css','<%= dom_munger.data.appcss %>'],
+                src:['temp/app.css'],
                 dest:'dist/app.full.min.css'
             }
         },
@@ -164,20 +168,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-        //Imagemin has issues on Windows.
-        //To enable imagemin:
-        // - "npm install grunt-contrib-imagemin"
-        // - Comment in this section
-        // - Add the "imagemin" task after the "htmlmin" task in the build task alias
-        // imagemin: {
-        //   main:{
-        //     files: [{
-        //       expand: true, cwd:'dist/',
-        //       src:['**/{*.png,*.jpg}'],
-        //       dest: 'dist/'
-        //     }]
-        //   }
-        // },
         karma: {
             options: {
                 frameworks: ['jasmine'],
@@ -226,7 +216,7 @@ module.exports = function (grunt) {
 
     });
 
-    grunt.registerTask('build',['jshint','clean:before','less','dom_munger','ngtemplates','cssmin','concat','ngAnnotate','uglify','copy','htmlmin','clean:after']);
+    grunt.registerTask('build',['jshint','clean:before','less:production', 'dom_munger', 'cssmin', 'ngtemplates','concat','ngAnnotate','uglify','copy','htmlmin','clean:after']);
     grunt.registerTask('serve', ['dom_munger:read','jshint','connect', 'watch']);
     grunt.registerTask('test',['dom_munger:read','karma:all_tests']);
 

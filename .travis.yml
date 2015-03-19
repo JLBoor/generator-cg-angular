@@ -6,5 +6,6 @@ before_script:
   - npm install -g grunt-cli yo bower
 
 script:
-  - cd app/templates/skeleton
+  - npm install
+  - bower install
   - grunt test

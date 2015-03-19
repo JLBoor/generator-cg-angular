@@ -1,6 +1,9 @@
 {
     "name": "sampleApp",
     "version": "0.0.1",
+    "scripts": {
+        "test": "grunt test"
+    },
     "devDependencies": {
         "grunt": "~0.4",
         "grunt-angular-templates": "~0.5",

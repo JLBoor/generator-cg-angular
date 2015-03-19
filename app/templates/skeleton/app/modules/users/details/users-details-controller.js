@@ -1,4 +1,4 @@
-angular.module('usersModule')
+angular.module('users')
 
     .controller('usersDetailsController', function($scope, $state, user, usersRestService) {
 
@@ -8,7 +8,7 @@ angular.module('usersModule')
         $scope.isEditing = user && user.id;
 
         $scope.createOrUpdate = function() {
-            usersRestService[$scope.isEditing ? 'update' : 'create'](user)
+            usersRestService[$scope.isEditing ? 'update' : 'create']($scope.user)
                 .then(_backToList);
         };
 

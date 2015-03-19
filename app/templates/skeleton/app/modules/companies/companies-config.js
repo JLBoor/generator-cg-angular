@@ -1,4 +1,4 @@
-angular.module('companiesModule', [])
+angular.module('companies', ['configuration.state', 'configuration.rest'])
 
 /**
  * Configure states

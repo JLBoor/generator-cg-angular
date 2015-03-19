@@ -1,4 +1,4 @@
-angular.module('companiesModule')
+angular.module('companies')
 
     .controller('companiesDetailsController', function($scope, $state, company, companiesRestService) {
 
@@ -8,7 +8,7 @@ angular.module('companiesModule')
         $scope.isEditing = company && company.id;
 
         $scope.delete = function() {
-            companiesRestService.delete($scope.company.id)
+            companiesRestService.delete($scope.company)
                 .then(_backToList);
         };
 

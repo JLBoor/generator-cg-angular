@@ -1,46 +1,12 @@
-angular.module('configuration.identity', ['ngCookies'])
+angular.module('configuration.identity.authentication', ['configuration.identity', 'configuration.state', 'ngCookies', 'ui.router'])
 
-    .controller('identityController', function($scope, identityService) {
+    .controller('authenticationController', function($scope, $state, authenticationService) {
 
-        $scope.$on('auth.login', function() {
-            $scope.identity = identityService.getIdentity();
-        });
-
-        $scope.$on('auth.logout', function() {
-            delete $scope.identity;
-        });
-
-    })
-
-    .service('identityService', function($q, $http, $resource, restConfigService) {
-
-        var identity;
-        var Identity = $resource(restConfigService.getIdentityOperation(), null, { 'update': { method:'PUT' } });
-
-        return {
-
-            getIdentity: function () {
-                return identity;
-            },
-
-            update: function (newIdentity) {
-                identity = newIdentity;
-                return Identity.update({id: 0}, {identity: newIdentity}).$promise;
-            },
-
-            ping: function () {
-                return Identity.get({id: 0}).$promise.then(function(session) {
-
-                    if(!session.identity || !session.identity.username) { throw 'INVALID SESSION'; }
-
-                    identity = session.identity;
-                    return identity;
+        $scope.signIn = function(username) {
+            authenticationService.authenticate(username)
+                .then(function() {
+                    $state.go('page.home');
                 });
-            },
-
-            clear: function() {
-                return this.update(null);
-            }
         };
     })
 
@@ -60,11 +26,12 @@ angular.module('configuration.identity', ['ngCookies'])
                 return identityService.clear().then(_logoutEvent);
             },
 
-            authenticate: function(username) {
+            authenticate: function(username, password) {
 
-                return Authentication.query({username : username}).$promise
+                return Authentication.query({username : username, password: password}).$promise
 
                     .then(function(sessions) {
+
                         if(!sessions || sessions.length !== 1) { throw 'INVALID CREDENTIALS'; }
 
                         $cookies.sessionId = 0;
@@ -87,16 +54,6 @@ angular.module('configuration.identity', ['ngCookies'])
         };
     })
 
-    .controller('authenticationController', function($scope, $state, authenticationService) {
-
-        $scope.signIn = function(username) {
-            authenticationService.authenticate(username)
-                .then(function() {
-                    $state.go('page.home');
-                });
-        };
-    })
-
     .config(function($stateProvider) {
 
         $stateProvider
@@ -104,7 +61,7 @@ angular.module('configuration.identity', ['ngCookies'])
             .state('page.login', {
                 url: '/login',
                 controller: 'authenticationController',
-                templateUrl: 'modules/configuration/partial/login.html'
+                templateUrl: 'modules/configuration/identity/partial/login.html'
             })
 
             .state('page.logout', {
@@ -113,14 +70,13 @@ angular.module('configuration.identity', ['ngCookies'])
                     'logout':  function(authenticationService) {
                         return authenticationService.clear();
                 }},
-                templateUrl: 'modules/configuration/partial/logout.html'
+                templateUrl: 'modules/configuration/identity/partial/logout.html'
             });
     })
 
     .run(function($rootScope, $state, authenticationService) {
 
         $rootScope.$on('$stateChangeStart', function (event, toState) {
-
             authenticationService.isAuthenticated().then(function(isAuthenticated) {
 
                 if(toState.name !== 'page.login' && !isAuthenticated) {

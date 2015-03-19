@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/JLBoor/generator-jb-angular.svg)](https://travis-ci.org/JLBoor/generator-jb-angular)
+
 # generator-jb-angular
 
 >Yeoman Generator for Enterprise Angular Projects. Forked from [cgross/generator-cg-angular](https://github.com/cgross/generator-cg-angular)
@@ -32,9 +34,10 @@ Then create your awesome app:
 And finally, `grunt sample` and open [http://localhost:9001/app/#/page/companies/list](http://localhost:9001/app/#/page/companies/list)
 
 Use one of the following username
-    `john.doe`
-    `french`
-    `companies`
+
+    john.doe
+    french
+    companies
 
 ## Generators
 For now, the sub-generators have been disabled. Only the app generator works.

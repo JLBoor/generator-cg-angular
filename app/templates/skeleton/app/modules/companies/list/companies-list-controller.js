@@ -1,4 +1,4 @@
-angular.module('companiesModule')
+angular.module('companies')
 
     .controller('companiesListController', function($scope, companies) {
 

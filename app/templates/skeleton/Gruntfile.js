@@ -174,7 +174,7 @@ module.exports = function (grunt) {
                 files: [  //this files data is also updated in the watch handler, if updated change there too
                     '<%= dom_munger.data.appjs %>',
                     'bower_components/angular-mocks/angular-mocks.js',
-                    createFolderGlobs('*-spec.js')
+                    createFolderGlobs('*.spec.js')
                 ],
                 logLevel:'ERROR',
                 reporters:['mocha'],
@@ -218,7 +218,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build',['jshint','clean:before','less:production', 'dom_munger', 'cssmin', 'ngtemplates','concat','ngAnnotate','uglify','copy','htmlmin','clean:after']);
     grunt.registerTask('serve', ['dom_munger:read','jshint','connect', 'watch']);
-    grunt.registerTask('test',['dom_munger:read','karma:all_tests']);
+    grunt.registerTask('test',['jshint', 'dom_munger:read','karma:all_tests']);
 
     grunt.registerTask('sample',['concurrent:server']);
 
@@ -235,8 +235,8 @@ module.exports = function (grunt) {
 
             //find the appropriate unit test for the changed file
             var spec = filepath;
-            if (filepath.lastIndexOf('-spec.js') === -1 || filepath.lastIndexOf('-spec.js') !== filepath.length - 8) {
-                spec = filepath.substring(0,filepath.length - 3) + '-spec.js';
+            if (filepath.lastIndexOf('.spec.js') === -1 || filepath.lastIndexOf('.spec.js') !== filepath.length - 8) {
+                spec = filepath.substring(0,filepath.length - 3) + '.spec.js';
             }
 
             //if the spec exists then lets run it

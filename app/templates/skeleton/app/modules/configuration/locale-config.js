@@ -2,8 +2,7 @@ angular.module('configuration.locale', ['pascalprecht.translate'])
 
     .config(function($translateProvider) {
 
-        $translateProvider.useStaticFilesLoader(
-            {
+        $translateProvider.useStaticFilesLoader({
             prefix: 'i18n/locale-',
             suffix: '.json'
         });

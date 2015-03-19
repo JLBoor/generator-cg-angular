@@ -1,4 +1,4 @@
-angular.module('usersModule', [])
+angular.module('users', ['configuration.rest', 'configuration.state'])
 
 /**
  * Configure states

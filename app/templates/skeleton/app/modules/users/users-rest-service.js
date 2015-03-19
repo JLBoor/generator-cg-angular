@@ -1,4 +1,4 @@
-angular.module('usersModule')
+angular.module('users')
     .service('usersRestService', function($resource, restConfigService) {
 
         var User = $resource(restConfigService.getOperation('/users/:id'), { id: '@id' }, { 'update': { method:'PUT' } });
@@ -22,7 +22,7 @@ angular.module('usersModule')
             },
 
             delete: function(user) {
-                return User.delete(user).$promise;
+                return User.delete({id: user.id}).$promise;
             },
 
             default: function() {

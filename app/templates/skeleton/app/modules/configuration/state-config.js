@@ -1,4 +1,4 @@
-angular.module('configuration.state', [])
+angular.module('configuration.state', ['ui.router'])
 
     .provider('stateConfigService', function() {
 
@@ -37,7 +37,6 @@ angular.module('configuration.state', [])
 
             .state('page.errors', {
                 url: '/errors',
-                abstract: true,
                 template: '<div ui-view></div>'
             })
 

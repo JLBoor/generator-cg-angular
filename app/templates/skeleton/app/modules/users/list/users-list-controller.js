@@ -1,4 +1,4 @@
-angular.module('usersModule')
+angular.module('users')
 
     .controller('usersListController', function($scope, users) {
 

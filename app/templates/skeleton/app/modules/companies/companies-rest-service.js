@@ -1,4 +1,4 @@
-angular.module('companiesModule')
+angular.module('companies')
     .service('companiesRestService', function($http, restConfigService) {
 
         var listOperation = restConfigService.getOperation('/companies');
@@ -25,8 +25,8 @@ angular.module('companiesModule')
                 return $http.put(listOperation + '/' + company.id, company);
             },
 
-            delete: function(id) {
-                return $http.delete(listOperation + '/' + id);
+            delete: function(company) {
+                return $http.delete(listOperation + '/' + company.id);
             },
 
             default: function() {

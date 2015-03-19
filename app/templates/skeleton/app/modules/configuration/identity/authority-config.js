@@ -1,9 +1,9 @@
-angular.module('configuration.authority', ['configuration.identity'])
+angular.module('configuration.identity.authority', ['configuration.identity', 'configuration.identity.authentication'])
 
     .config(function($stateProvider) {
         $stateProvider.state('page.errors.403', {
             url: '/403',
-            templateUrl: 'modules/configuration/partial/403.html'
+            templateUrl: 'modules/configuration/identity/partial/403.html'
         });
     })
 
@@ -18,12 +18,11 @@ angular.module('configuration.authority', ['configuration.identity'])
                 if(!state) { return false; }
                 if(!state.data || !state.data.authorities) { return true; }
 
-                return identity && identity.authorities && _.every(state.data.authorities, function(authority) {
+                return !!(identity && identity.authorities && _.every(state.data.authorities, function(authority) {
                     return identity.authorities.indexOf(authority) !== -1;
-                });
+                }));
             }
         };
-
     })
 
     .run(function($rootScope, authorityService) {

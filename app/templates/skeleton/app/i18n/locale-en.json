@@ -58,7 +58,7 @@
 
         "ACTION_CREATE": "Create",
         "ACTION_CANCEL": "cancel",
-        "ACTION_UPDATE": "Delete",
+        "ACTION_UPDATE": "Update",
         "ACTION_DELETE": "Delete"
     },
 

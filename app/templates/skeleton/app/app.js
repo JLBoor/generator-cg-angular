@@ -1,13 +1,14 @@
 angular.module('sampleApp', [
     'ui.bootstrap',
     'ui.router',
-    'configuration.authority',
-    'configuration.identity',
     'configuration.rest',
     'configuration.state',
     'configuration.locale',
-    'companiesModule',
-    'usersModule'])
+    'configuration.identity',
+    'configuration.identity.authority',
+    'configuration.identity.authentication',
+    'companies',
+    'users'])
 
 /**
  * Configure rest URL

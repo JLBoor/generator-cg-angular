@@ -221,7 +221,6 @@ module.exports = function (grunt) {
     grunt.registerTask('test',['jshint', 'dom_munger:read','karma:all_tests']);
 
     grunt.registerTask('travis',['jshint', 'dom_munger:read','karma:during_watch']);
-
     grunt.registerTask('sample',['concurrent:server']);
 
     grunt.event.on('watch', function(action, filepath) {

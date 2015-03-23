@@ -4,15 +4,14 @@
       "id": 0,
       "identity": {
         "id": 0,
-        "username": "french",
-        "lang": "fr",
+        "username": "john.doe",
         "authorities": [
-          "USERS",
-          "USERS.EDIT",
-          "USERS.CREATE",
-          "COMPANIES",
-          "COMPANIES.EDIT",
-          "COMPANIES.CREATE"
+          "USER",
+          "USER.EDIT",
+          "USER.CREATE",
+          "COMPANY",
+          "COMPANY.EDIT",
+          "COMPANY.CREATE"
         ]
       }
     }
@@ -22,76 +21,76 @@
       "id": 0,
       "username": "john.doe",
       "authorities": [
-        "USERS",
-        "USERS.EDIT",
-        "USERS.CREATE",
-        "COMPANIES",
-        "COMPANIES.EDIT",
-        "COMPANIES.CREATE"
+        "USER",
+        "USER.EDIT",
+        "USER.CREATE",
+        "COMPANY",
+        "COMPANY.EDIT",
+        "COMPANY.CREATE"
       ]
     },
     {
       "id": 1,
-      "username": "users",
+      "username": "user",
       "authorities": [
-        "USERS"
+        "USER"
       ]
     },
     {
       "id": 2,
-      "username": "users.edit",
+      "username": "user.edit",
       "authorities": [
-        "USERS",
-        "USERS.EDIT"
+        "USER",
+        "USER.EDIT"
       ]
     },
     {
       "id": 3,
-      "username": "users.create",
+      "username": "user.create",
       "authorities": [
-        "USERS",
-        "USERS.CREATE"
+        "USER",
+        "USER.CREATE"
       ]
     },
     {
       "id": 4,
-      "username": "users.all",
+      "username": "user.all",
       "authorities": [
-        "USERS",
-        "USERS.EDIT",
-        "USERS.CREATE"
+        "USER",
+        "USER.EDIT",
+        "USER.CREATE"
       ]
     },
     {
       "id": 5,
-      "username": "companies",
+      "username": "company",
       "authorities": [
-        "COMPANIES"
+        "COMPANY"
       ]
     },
     {
       "id": 6,
-      "username": "companies.edit",
+      "username": "company.edit",
       "authorities": [
-        "COMPANIES",
-        "COMPANIES.EDIT"
+        "COMPANY",
+        "COMPANY.EDIT"
       ]
     },
     {
       "id": 7,
-      "username": "companies.create",
+      "username": "company.create",
       "authorities": [
-        "COMPANIES",
-        "COMPANIES.CREATE"
+        "COMPANY",
+        "COMPANY.CREATE"
       ]
     },
     {
       "id": 8,
-      "username": "companies.all",
+      "username": "company.all",
       "authorities": [
-        "COMPANIES",
-        "COMPANIES.EDIT",
-        "COMPANIES.CREATE"
+        "COMPANY",
+        "COMPANY.EDIT",
+        "COMPANY.CREATE"
       ]
     },
     {
@@ -99,12 +98,12 @@
       "username": "french",
       "lang": "fr",
       "authorities": [
-        "USERS",
-        "USERS.EDIT",
-        "USERS.CREATE",
-        "COMPANIES",
-        "COMPANIES.EDIT",
-        "COMPANIES.CREATE"
+        "USER",
+        "USER.EDIT",
+        "USER.CREATE",
+        "COMPANY",
+        "COMPANY.EDIT",
+        "COMPANY.CREATE"
       ]
     }
   ],

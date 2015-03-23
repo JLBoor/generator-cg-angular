@@ -7,8 +7,8 @@ angular.module('sampleApp', [
     'configuration.identity',
     'configuration.identity.authority',
     'configuration.identity.authentication',
-    'companies',
-    'users'])
+    'company',
+    'user'])
 
 /**
  * Configure rest URL
@@ -26,8 +26,8 @@ angular.module('sampleApp', [
 
         var findHomeState = ['authorityService', function(authorityService) {
 
-            if(authorityService.hasAuthority('page.companies.list')) { return 'page.companies.list'; }
-            else if(authorityService.hasAuthority('page.users.list')) { return 'page.users.list'; }
+            if(authorityService.hasAuthority('page.company.list')) { return 'page.company.list'; }
+            else if(authorityService.hasAuthority('page.user.list')) { return 'page.user.list'; }
 
             return 'page.errors.403';
         }];

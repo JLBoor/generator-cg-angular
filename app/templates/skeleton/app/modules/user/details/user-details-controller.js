@@ -1,6 +1,6 @@
-angular.module('users')
+angular.module('user')
 
-    .controller('usersDetailsController', function($scope, $state, user, usersRestService) {
+    .controller('userDetailsController', function($scope, $state, user, userRestService) {
 
         var _backToList = function() { $state.go('^.list'); };
 
@@ -8,12 +8,12 @@ angular.module('users')
         $scope.isEditing = user && user.id;
 
         $scope.createOrUpdate = function() {
-            usersRestService[$scope.isEditing ? 'update' : 'create']($scope.user)
+            userRestService[$scope.isEditing ? 'update' : 'create']($scope.user)
                 .then(_backToList);
         };
 
         $scope.delete = function() {
-            usersRestService.delete(user)
+            userRestService.delete(user)
                 .then(_backToList);
         };
 

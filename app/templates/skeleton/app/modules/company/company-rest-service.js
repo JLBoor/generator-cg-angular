@@ -1,5 +1,5 @@
-angular.module('companies')
-    .service('companiesRestService', function($http, restConfigService) {
+angular.module('company')
+    .service('companyRestService', function($http, restConfigService) {
 
         var listOperation = restConfigService.getOperation('/companies');
 

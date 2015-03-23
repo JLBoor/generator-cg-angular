@@ -1,7 +1,7 @@
 <h2 class="page-header">
     <img ng-if="company.picture" ng-src="{{company.picture}}" alt="Company logo" class="img-circle">
     {{company.name}}
-    <small>{{ isEditing ? 'COMPANIES.ACTION_UPDATE' : 'COMPANIES.ACTION_CREATE' | translate }}</small>
+    <small>{{ isEditing ? 'COMPANY.ACTION_UPDATE' : 'COMPANY.ACTION_CREATE' | translate }}</small>
 </h2>
 
 
@@ -13,7 +13,7 @@
             <form class="form-horizontal">
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label" translate>COMPANIES.PROPERTY_ID</label>
+                    <label class="col-sm-4 control-label" translate>COMPANY.PROPERTY_ID</label>
                     <div class="col-sm-8">
                         <p ng-if="isEditing" class="form-control-static" ng-bind="company.id"></p>
                         <p ng-if="!isEditing" class="form-control-static text-muted" translate>COMMON.MESSAGE.AUTO_GENERATED</p>
@@ -21,45 +21,45 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="name" class="col-sm-4 control-label" translate>COMPANIES.PROPERTY_NAME</label>
+                    <label for="name" class="col-sm-4 control-label" translate>COMPANY.PROPERTY_NAME</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="name" ng-model="company.name">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="address" class="col-sm-4 control-label" translate>COMPANIES.PROPERTY_ADDRESS</label>
+                    <label for="address" class="col-sm-4 control-label" translate>COMPANY.PROPERTY_ADDRESS</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="address" ng-model="company.address">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="phone" class="col-sm-4 control-label" translate>COMPANIES.PROPERTY_PHONE</label>
+                    <label for="phone" class="col-sm-4 control-label" translate>COMPANY.PROPERTY_PHONE</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="phone" ng-model="company.phone">
                     </div>
                 </div>
 
                 <fieldset>
-                    <legend translate>COMPANIES.PROPERTY_CONTACT</legend>
+                    <legend translate>COMPANY.PROPERTY_CONTACT</legend>
 
                 <div class="form-group">
-                    <label for="last" class="col-sm-4 control-label" translate>COMPANIES.PROPERTY_LASTNAME</label>
+                    <label for="last" class="col-sm-4 control-label" translate>COMPANY.PROPERTY_LASTNAME</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="last" ng-model="company.contact.name.last">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="first" class="col-sm-4 control-label" translate>COMPANIES.PROPERTY_FIRSTNAME</label>
+                    <label for="first" class="col-sm-4 control-label" translate>COMPANY.PROPERTY_FIRSTNAME</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="first" ng-model="company.contact.name.first">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="email" class="col-sm-4 control-label" translate>COMPANIES.PROPERTY_EMAIL</label>
+                    <label for="email" class="col-sm-4 control-label" translate>COMPANY.PROPERTY_EMAIL</label>
                     <div class="col-sm-8">
                         <input type="email" class="form-control" id="email" ng-model="company.contact.email">
                     </div>
@@ -68,9 +68,9 @@
             </form>
 
             <div class="pull-right">
-                <a ui-sref="page.companies.list" type="button" class="btn btn-sm btn-link" translate>COMPANIES.ACTION_CANCEL</a>
-                <button ng-if="isEditing" ng-click="delete()" type="button" class="btn btn-sm btn-danger" translate>COMPANIES.ACTION_DELETE</button>
-                <button ng-click="createOrUpdate()" type="button" class="btn btn-sm btn-success">{{ isEditing ? 'COMPANIES.ACTION_UPDATE' : 'COMPANIES.ACTION_CREATE' | translate }}</button>
+                <a ui-sref="page.company.list" type="button" class="btn btn-sm btn-link" translate>COMPANY.ACTION_CANCEL</a>
+                <button ng-if="isEditing" ng-click="delete()" type="button" class="btn btn-sm btn-danger" translate>COMPANY.ACTION_DELETE</button>
+                <button ng-click="createOrUpdate()" type="button" class="btn btn-sm btn-success">{{ isEditing ? 'COMPANY.ACTION_UPDATE' : 'COMPANY.ACTION_CREATE' | translate }}</button>
             </div>
         </div>
     </div>

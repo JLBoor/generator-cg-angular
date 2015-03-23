@@ -1,22 +1,22 @@
-describe('The usersListController, ', function () {
+describe('The userListController, ', function () {
 
     var user;
 
-    var usersRestService;
+    var userRestService;
     var $controller;
     var $state;
     var $scope;
 
     var _userDetailsController = function(user) {
-        $controller('usersDetailsController', {$scope: $scope, $state: $state, user: user, usersRestService: usersRestService});
+        $controller('userDetailsController', {$scope: $scope, $state: $state, user: user, userRestService: userRestService});
     };
 
-    beforeEach(module('users'));
-    beforeEach(inject(function(_$rootScope_, _$controller_, _$state_, _usersRestService_) {
+    beforeEach(module('user'));
+    beforeEach(inject(function(_$rootScope_, _$controller_, _$state_, _userRestService_) {
         $scope = _$rootScope_.$new();
         $controller = _$controller_;
         $state = _$state_;
-        usersRestService= _usersRestService_;
+        userRestService= _userRestService_;
 
         user = {id: 7, username: 'doe'};
     }));
@@ -46,9 +46,9 @@ describe('The usersListController, ', function () {
     describe('when an rest call is made, should transition to the user list and', function () {
 
         beforeEach(inject(function(_$q_) {
-            spyOn(usersRestService, 'create').andReturn(_$q_.when());
-            spyOn(usersRestService, 'update').andReturn(_$q_.when());
-            spyOn(usersRestService, 'delete').andReturn(_$q_.when());
+            spyOn(userRestService, 'create').andReturn(_$q_.when());
+            spyOn(userRestService, 'update').andReturn(_$q_.when());
+            spyOn(userRestService, 'delete').andReturn(_$q_.when());
 
             spyOn($state, 'go');
         }));
@@ -65,7 +65,7 @@ describe('The usersListController, ', function () {
             $scope.user = {username: 'h'};
             $scope.createOrUpdate();
 
-            expect(usersRestService.create).toHaveBeenCalledWith($scope.user);
+            expect(userRestService.create).toHaveBeenCalledWith($scope.user);
         });
 
         it('should update the user when it is an existing user', function () {
@@ -74,7 +74,7 @@ describe('The usersListController, ', function () {
 
             $scope.user.username = 'a';
             $scope.createOrUpdate();
-            expect(usersRestService.update).toHaveBeenCalledWith($scope.user);
+            expect(userRestService.update).toHaveBeenCalledWith($scope.user);
         });
 
         it('should delete the user', function () {
@@ -83,7 +83,7 @@ describe('The usersListController, ', function () {
 
             $scope.delete();
 
-            expect(usersRestService.delete).toHaveBeenCalledWith($scope.user);
+            expect(userRestService.delete).toHaveBeenCalledWith($scope.user);
         });
 
     });

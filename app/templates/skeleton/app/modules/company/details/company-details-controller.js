@@ -1,6 +1,6 @@
-angular.module('companies')
+angular.module('company')
 
-    .controller('companiesDetailsController', function($scope, $state, company, companiesRestService) {
+    .controller('companyDetailsController', function($scope, $state, company, companyRestService) {
 
         var _backToList = function() { $state.go('^.list'); };
 
@@ -8,12 +8,12 @@ angular.module('companies')
         $scope.isEditing = company && company.id;
 
         $scope.delete = function() {
-            companiesRestService.delete($scope.company)
+            companyRestService.delete($scope.company)
                 .then(_backToList);
         };
 
         $scope.createOrUpdate = function() {
-            companiesRestService[$scope.isEditing ? 'update' : 'create']($scope.company)
+            companyRestService[$scope.isEditing ? 'update' : 'create']($scope.company)
                 .then(_backToList);
         };
 

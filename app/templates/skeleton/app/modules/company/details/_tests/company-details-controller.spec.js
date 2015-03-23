@@ -1,44 +1,44 @@
-describe('The companiesListController, ', function () {
+describe('The companyListController, ', function () {
 
     var company;
 
-    var companiesRestService;
+    var companyRestService;
     var $controller;
     var $state;
     var $scope;
 
-    var _companiesDetailsController = function(company) {
-        $controller('companiesDetailsController', {$scope: $scope, $state: $state, company: company, companiesRestService: companiesRestService});
+    var _companyDetailsController = function(company) {
+        $controller('companyDetailsController', {$scope: $scope, $state: $state, company: company, companyRestService: companyRestService});
     };
 
-    beforeEach(module('companies'));
-    beforeEach(inject(function(_$rootScope_, _$controller_, _$state_, _companiesRestService_) {
+    beforeEach(module('company'));
+    beforeEach(inject(function(_$rootScope_, _$controller_, _$state_, _companyRestService_) {
         $scope = _$rootScope_.$new();
         $controller = _$controller_;
         $state = _$state_;
-        companiesRestService = _companiesRestService_;
+        companyRestService = _companyRestService_;
 
         company = {id: 7, name: 'doe'};
     }));
 
 
     it('should add the company to the $scope', function () {
-        _companiesDetailsController(company);
+        _companyDetailsController(company);
         expect($scope.company).toBe(company);
     });
 
     it('should set $scope.isEditing when the company exists', function () {
-        _companiesDetailsController(company);
+        _companyDetailsController(company);
         expect($scope.isEditing).toBeTruthy();
     });
 
     it('should not set $scope.isEditing when the company does not exist', function () {
-        _companiesDetailsController(undefined);
+        _companyDetailsController(undefined);
         expect($scope.isEditing).toBeFalsy();
     });
 
     it('should not set $scope.isEditing when the company does not have an id', function () {
-        _companiesDetailsController({name: 'x'});
+        _companyDetailsController({name: 'x'});
         expect($scope.isEditing).toBeFalsy();
     });
 
@@ -46,9 +46,9 @@ describe('The companiesListController, ', function () {
     describe('when an rest call is made, should transition to the company list and', function () {
 
         beforeEach(inject(function(_$q_) {
-            spyOn(companiesRestService, 'create').andReturn(_$q_.when());
-            spyOn(companiesRestService, 'update').andReturn(_$q_.when());
-            spyOn(companiesRestService, 'delete').andReturn(_$q_.when());
+            spyOn(companyRestService, 'create').andReturn(_$q_.when());
+            spyOn(companyRestService, 'update').andReturn(_$q_.when());
+            spyOn(companyRestService, 'delete').andReturn(_$q_.when());
 
             spyOn($state, 'go');
         }));
@@ -59,29 +59,29 @@ describe('The companiesListController, ', function () {
         }));
 
         it('should create the company when it is a new company', function () {
-            _companiesDetailsController(undefined);
+            _companyDetailsController(undefined);
             expect($scope.company).toBeUndefined();
 
             $scope.company = {name: 'h'};
             $scope.createOrUpdate();
 
-            expect(companiesRestService.create).toHaveBeenCalledWith($scope.company);
+            expect(companyRestService.create).toHaveBeenCalledWith($scope.company);
         });
 
         it('should update the company when it is an existing company', function () {
-            _companiesDetailsController(company);
+            _companyDetailsController(company);
 
             $scope.company.name = 'a';
             $scope.createOrUpdate();
-            expect(companiesRestService.update).toHaveBeenCalledWith($scope.company);
+            expect(companyRestService.update).toHaveBeenCalledWith($scope.company);
         });
 
         it('should delete the company', function () {
-            _companiesDetailsController(company);
+            _companyDetailsController(company);
 
             $scope.delete();
 
-            expect(companiesRestService.delete).toHaveBeenCalledWith($scope.company);
+            expect(companyRestService.delete).toHaveBeenCalledWith($scope.company);
         });
 
     });

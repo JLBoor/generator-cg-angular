@@ -1,5 +1,5 @@
-angular.module('users')
-    .service('usersRestService', function($resource, restConfigService) {
+angular.module('user')
+    .service('userRestService', function($resource, restConfigService) {
 
         var User = $resource(restConfigService.getOperation('/users/:id'), { id: '@id' }, { 'update': { method:'PUT' } });
 

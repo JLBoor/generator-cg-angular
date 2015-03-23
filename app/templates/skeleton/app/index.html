@@ -35,26 +35,27 @@
 
 
   <!-- Main App JS -->
-  <script src="modules/companies/companies-config.js"></script>
-  <script src="modules/companies/companies-rest-service.js"></script>
-  <script src="modules/companies/list/companies-list-controller.js"></script>
-  <script src="modules/companies/details/companies-details-controller.js"></script>
+  <script src="modules/company/company-config.js"></script>
+  <script src="modules/company/company-rest-service.js"></script>
+  <script src="modules/company/list/company-list-controller.js"></script>
+  <script src="modules/company/details/company-details-controller.js"></script>
 
-  <script src="modules/users/users-config.js"></script>
-  <script src="modules/users/users-rest-service.js"></script>
-  <script src="modules/users/list/users-list-controller.js"></script>
-  <script src="modules/users/details/users-details-controller.js"></script>
-
-  <script src="app.js"></script>
+  <script src="modules/user/user-config.js"></script>
+  <script src="modules/user/user-rest-service.js"></script>
+  <script src="modules/user/list/user-list-controller.js"></script>
+  <script src="modules/user/details/user-details-controller.js"></script>
   <!-- Add New Component JS Above -->
+
+  <!-- Main App JS -->
+  <script src="app.js"></script>
 
   <div class="content">
 
       <div class="jumbotron">
 
           <ul class="nav navbar-nav navbar-right nav-main nav-pills pull-right">
-              <li><a ng-if="$hasAuthority('page.companies.list')" ui-sref="page.companies.list" translate>COMPANIES.LINK</a></li>
-              <li><a ng-if="$hasAuthority('page.users.list')" ui-sref="page.users.list" translate>USERS.LINK</a></li>
+              <li><a ng-if="$hasAuthority('page.company.list')" ui-sref="page.company.list" translate>COMPANY.LINK</a></li>
+              <li><a ng-if="$hasAuthority('page.user.list')" ui-sref="page.user.list" translate>USER.LINK</a></li>
               <li dropdown class="dropdown" ng-controller="identityController" >
                   <a ng-if="identity" dropdown-toggle="" href="" class="dropdown-toggle">
                       <i class="glyphicon glyphicon-user"></i>

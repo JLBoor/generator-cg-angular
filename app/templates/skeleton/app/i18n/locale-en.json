@@ -42,7 +42,7 @@
         }
     },
 
-    "COMPANIES": {
+    "COMPANY": {
         "LINK": "Companies",
 
         "LIST_TITLE": "Company List",
@@ -62,7 +62,7 @@
         "ACTION_DELETE": "Delete"
     },
 
-    "USERS": {
+    "USER": {
         "LINK": "Users",
 
         "LIST_TITLE": "User List",

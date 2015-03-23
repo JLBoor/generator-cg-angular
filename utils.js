@@ -145,14 +145,7 @@ exports.askForModule = function(type,that,cb){
     that.prompt(prompts, function (props) {
 
         var i = choices.indexOf(props.module);
-
-        var module;
-
-        if (i === 0) {
-            module = mainModule;
-        } else {
-            module = ngParseModule.parse(modules[i-1].file);
-        }
+        var module = ngParseModule.parse(modules[i].file);
 
         cb.bind(that)(module);
     }.bind(that));
@@ -170,6 +163,7 @@ exports.askForDir = function(type,that,module,ownDir,cb){
         configedDir = '.';
     }
     var defaultDir = path.join(that.dir,configedDir,'/');
+
     defaultDir = path.relative(process.cwd(),defaultDir);
 
     if (ownDir) {

@@ -1,5 +1,5 @@
-[$http](https://docs.angularjs.org/api/ng/service/$http)
-[$resource](https://docs.angularjs.org/api/ngResource/service/$resource)
+[$http]: https://docs.angularjs.org/api/ng/service/$http
+[$resource]: https://docs.angularjs.org/api/ngResource/service/$resource
 
 
 # generator-jb-angular [![Build Status](https://travis-ci.org/JLBoor/generator-jb-angular.svg)](https://travis-ci.org/JLBoor/generator-jb-angular)

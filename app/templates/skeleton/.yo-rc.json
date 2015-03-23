@@ -4,7 +4,6 @@
     "modalDirectory": "partial/",
     "directiveDirectory": "directive/",
     "filterDirectory": "filter/",
-    "serviceDirectory": "service/",
     "inject": {
       "js": {
         "file": "app/index.html",

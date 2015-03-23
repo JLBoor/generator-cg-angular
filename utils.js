@@ -6,9 +6,11 @@ _.str = require('underscore.string');
 _.mixin(_.str.exports());
 var ngParseModule = require('ng-parse-module');
 
+var APP_FOLDER = 'app/';
+var APP_FILE = APP_FOLDER + 'app.js';
+var MODULE_FOLDER = APP_FOLDER + 'modules/';
 
 exports.JS_MARKER = "<!-- Add New Component JS Above -->";
-exports.LESS_MARKER = "/* Add Component LESS Above */";
 
 exports.ROUTE_MARKER = "/* Add New Routes Above */";
 exports.STATE_MARKER = "/* Add New States Above */";
@@ -47,10 +49,17 @@ exports.processTemplates = function(name,dir,type,that,defaultDir,configName,mod
             return template[0] !== '.';
         })
         .each(function(template){
-            var customTemplateName = template.replace(type,name);
+
+            var customTemplateName = that._.dasherize(template.replace(type,name));
             var templateFile = path.join(templateDirectory,template);
+            if(fs.statSync(templateFile).isDirectory()) {
+                exports.processTemplates(name,dir+'/'+template,type,that,defaultDir+'/'+template,configName,module)
+                return;
+            }
+
+
             //create the file
-            that.template(templateFile,path.join(dir,customTemplateName));
+            that.template(templateFile,path.join(dir, customTemplateName));
             //inject the file reference into index.html/app.less/etc as appropriate
             exports.inject(path.join(dir,customTemplateName),that,module);
         });
@@ -58,17 +67,17 @@ exports.processTemplates = function(name,dir,type,that,defaultDir,configName,mod
 
 exports.inject = function(filename,that,module) {
     //special case to skip unit tests
-    if (_(filename).endsWith('-spec.js') ||
-        _(filename).endsWith('_spec.js') ||
-        _(filename).endsWith('-test.js') ||
-        _(filename).endsWith('_test.js')) {
-        return;
+    if (_(filename).endsWith('.spec.js')) { return; }
+
+    if (_(filename).startsWith(APP_FOLDER)) {
+        filename = filename.substring(APP_FOLDER.length);
     }
 
     var ext = path.extname(filename);
     if (ext[0] === '.') {
         ext = ext.substring(1);
     }
+
     var config = that.config.get('inject')[ext];
     if (config) {
         var configFile = _.template(config.file)({module:path.basename(module.file,'.js')});
@@ -80,23 +89,13 @@ exports.inject = function(filename,that,module) {
         injectFileRef = injectFileRef.replace(/\\/g,'/');
         var lineTemplate = _.template(config.template)({filename:injectFileRef});
         exports.addToFile(configFile,lineTemplate,config.marker);
+
         that.log.writeln(chalk.green(' updating') + ' %s',path.basename(configFile));
     }
 };
 
 exports.injectRoute = function(moduleFile,uirouter,name,route,routeUrl,that){
-
-    routeUrl = routeUrl.replace(/\\/g,'/');
-
-    if (uirouter){
-        var code = '$stateProvider.state(\''+name+'\', {\n        url: \''+route+'\',\n        templateUrl: \''+routeUrl+'\'\n    });';
-        exports.addToFile(moduleFile,code,exports.STATE_MARKER);
-    } else {
-        exports.addToFile(moduleFile,'$routeProvider.when(\''+route+'\',{templateUrl: \''+routeUrl+'\'});',exports.ROUTE_MARKER);
-    }
-
     that.log.writeln(chalk.green(' updating') + ' %s',path.basename(moduleFile));
-
 };
 
 exports.getParentModule = function(dir){
@@ -125,7 +124,7 @@ exports.getParentModule = function(dir){
 exports.askForModule = function(type,that,cb){
 
     var modules = that.config.get('modules');
-    var mainModule = ngParseModule.parse('app.js');
+    var mainModule = ngParseModule.parse(APP_FILE);
     mainModule.primary = true;
 
     if (!modules || modules.length === 0) {

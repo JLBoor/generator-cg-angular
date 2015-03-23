@@ -1,8 +1,12 @@
+[$http](https://docs.angularjs.org/api/ng/service/$http)
+[$resource](https://docs.angularjs.org/api/ngResource/service/$resource)
+
+
 # generator-jb-angular [![Build Status](https://travis-ci.org/JLBoor/generator-jb-angular.svg)](https://travis-ci.org/JLBoor/generator-jb-angular)
 
 >Yeoman Generator for Enterprise Angular Projects. Forked from [cgross/generator-cg-angular](https://github.com/cgross/generator-cg-angular)
 
-This generator follows the [Angular Best Practices](http://jlboor.github.io/angularjs/angular-best-practices-introduction/).
+This generator follows the [Angular Best Practices](http://jlboor.github.io/angularjs/angular-best-practices-introduction/) *(Work in progress)*.
 
 
 ## Getting Started
@@ -28,13 +32,13 @@ Then create your awesome app:
     cd MyNewAwesomeApp
     yo jb-angular
 
-And finally, `grunt sample` and open [http://localhost:9001/app/#/page/companies/list](http://localhost:9001/app/#/page/companies/list)
+And finally, `grunt sample` and open [http://localhost:9001/app/#/page/company/list](http://localhost:9001/app/#/page/company/list)
 
 Use one of the following username
 
     john.doe
     french
-    companies
+    company
 
 ### Grunt tasks
     grunt serve   #This will run a development server with watch & livereload enabled.
@@ -43,7 +47,15 @@ Use one of the following username
     grunt sample  #Same as grunt serve, but also starts the mock server on http://localhost:9002
 
 ### Generators
-For now, all the sub-generators have been disabled. Only the app generator works.
+#### Modules
+    yo jb-angular:module
+
+#### Services
+    yo jb-angular:service
+
+- blank: generates a simple service with no content. Ideal when starting a new business service.
+- $http: generate a rest service that encapsulate all the calls for a specific operation.
+- $resource: same as $http, but uses the [$resource] service instead of the [$http]
 
 ## Code structure
     app/................................... app folder

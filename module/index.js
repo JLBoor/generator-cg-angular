@@ -13,11 +13,7 @@ _.mixin(_.str.exports());
 var ModuleGenerator = module.exports = function ModuleGenerator(args, options, config) {
 
     cgUtils.getNameArg(this,args);
-
     yeoman.generators.Base.apply(this, arguments);
-
-    this.uirouter = this.config.get('uirouter');
-    this.routerModuleName = this.uirouter ? 'ui.router' : 'ngRoute';
 };
 
 util.inherits(ModuleGenerator, yeoman.generators.Base);
@@ -25,13 +21,21 @@ util.inherits(ModuleGenerator, yeoman.generators.Base);
 ModuleGenerator.prototype.askFor = function askFor() {
     var cb = this.async();
     var that = this;
+    var modulePath = that.name ? that.name.split('.') : [];
+
+    that.folder =  'app/modules/';
+
+    for(var i=0; i<modulePath.length; i++) {
+        that.folder += modulePath[i] + '/';
+    }
 
     var prompts = [
         {
             name:'dir',
             message:'Where would you like to create the module (must specify a subdirectory)?',
             default: function(data){
-                return path.join(that.name || data.name,'/');
+                var name = data.name ? data.name : '';
+                return path.join(that.folder + name,'/');
             },
             validate: function(value) {
                 value = _.str.trim(value);
@@ -43,12 +47,12 @@ ModuleGenerator.prototype.askFor = function askFor() {
         }
     ];
 
-    cgUtils.addNamePrompt(this,prompts,'module');
+    cgUtils.addNamePrompt(this,prompts, 'module');
 
     this.prompt(prompts, function (props) {
         if (props.name){
             this.name = props.name;
-        }        
+        }
         this.dir = path.join(props.dir,'/');
         cb();
     }.bind(this));
@@ -67,7 +71,7 @@ ModuleGenerator.prototype.files = function files() {
     if (!modules) {
         modules = [];
     }
-    modules.push({name:_.camelize(this.name),file:path.join(this.dir,this.name + '.js')});
+    modules.push({name:_.camelize(this.name),file:path.join(this.dir,this.name + '-config.js')});
     this.config.set('modules',modules);
     this.config.save();
 };

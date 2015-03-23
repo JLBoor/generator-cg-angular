@@ -69,6 +69,9 @@ For now, all the sub-generators have been disabled. Only the app generator works
       app.js............................... angular app initialization
       index.html........................... main HTML file
 
+### Principles
+**TODO**
+
 ## Resources
 - [cgross/generator-cg-angular](https://github.com/cgross/generator-cg-angular)
 - [JSON Generator](http://www.json-generator.com/)

@@ -63,7 +63,7 @@ ServiceGenerator.prototype.askFor = function askFor() {
         if (props.entityName) { this.entityName = props.entityName; this.name = this.entityName + 'RestService'; }
         if (props.restOperation) { this.restOperation = props.restOperation; }
 
-        cgUtils.askForModuleAndDir('',this,false,cb);
+        cgUtils.askForModuleAndDir('service',this,false,cb);
     }.bind(this));
 
 };

@@ -1,0 +1,26 @@
+{
+  "generator-jb-angular": {
+    "partialDirectory": "partial/",
+    "modalDirectory": "partial/",
+    "directiveDirectory": "directive/",
+    "filterDirectory": "filter/",
+    "serviceDirectory": "service/",
+    "inject": {
+      "js": {
+        "file": "app/index.html",
+        "marker": "<!-- Add New Component JS Above -->",
+        "template": "<script src=\"<%= filename %>\"></script>"
+      }
+    },
+    "modules": [
+        {
+        "name": "user",
+        "file": "app/modules/user/user-config.js"
+        },
+        {
+            "name": "company",
+            "file": "app/modules/company/company-config.js"
+        }
+    ]
+  }
+}

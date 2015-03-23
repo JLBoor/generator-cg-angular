@@ -124,16 +124,13 @@ exports.getParentModule = function(dir){
 exports.askForModule = function(type,that,cb){
 
     var modules = that.config.get('modules');
-    var mainModule = ngParseModule.parse(APP_FILE);
-    mainModule.primary = true;
 
     if (!modules || modules.length === 0) {
-        cb.bind(that)(mainModule);
+        that.log.writeln(chalk.red('No modules were found.') +' Please create the module first using: yo jb-angular:module');
         return;
     }
 
     var choices = _.pluck(modules,'name');
-    choices.unshift(mainModule.name + ' (Primary Application Module)');
 
     var prompts = [
         {

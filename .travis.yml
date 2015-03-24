@@ -8,7 +8,7 @@ addons:
 
 before_script:
   - cd app/templates/skeleton
-  - npm install -g grunt-cli yo bower
+  - npm install -g grunt-cli yo bower codeclimate-test-reporter
 
 script:
   - npm install

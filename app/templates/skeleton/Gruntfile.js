@@ -2,6 +2,7 @@
 'use strict';
 
 var pkg = require('./package.json');
+var _ = require('./package.json');
 
 //Using exclusion patterns slows down Grunt significantly
 //instead of creating a set of patterns like '**/*.js' and '!**/node_modules/**'
@@ -51,8 +52,12 @@ module.exports = function (grunt) {
                     livereloadOnError: false,
                     spawn: false
                 },
-                files: [createFolderGlobs(['*.js','*.html']),'!_SpecRunner.html','!.grunt'],
-                tasks: [] //all the tasks are run dynamically during the watch event handler
+                files: [createFolderGlobs(['app/**/*.js','app/**/*.html']),'!_SpecRunner.html','!.grunt'],
+                tasks: [
+                    'jshint:main',
+                    'dom_munger:read',
+                    'karma:during_watch'
+                ]
             }
         },
         jshint: {
@@ -60,7 +65,7 @@ module.exports = function (grunt) {
                 options: {
                     jshintrc: '.jshintrc'
                 },
-                src: createFolderGlobs('*.js')
+                src: createFolderGlobs('app/**/*.js')
             }
         },
         clean: {
@@ -176,16 +181,32 @@ module.exports = function (grunt) {
                     'bower_components/angular-mocks/angular-mocks.js',
                     createFolderGlobs('*.spec.js')
                 ],
-                logLevel:'ERROR',
-                reporters:['mocha'],
+                logLevel: 'ERROR',
                 autoWatch: false, //watching is handled by grunt-contrib-watch
                 singleRun: true
             },
             all_tests: {
+                reporters:['mocha'],
                 browsers: ['PhantomJS','Chrome','Firefox']
             },
             during_watch: {
+                reporters:['mocha'],
                 browsers: ['PhantomJS']
+            },
+            unit_and_coverage: {
+                browsers: ['PhantomJS'],
+                reporters:['mocha', 'coverage'],
+                preprocessors: {
+                    'app/**/!(_test)/*.js': ['coverage']
+                },
+
+                coverageReporter: {
+                    type: 'lcovonly',
+                    dir: 'target/karma-reports/',
+                    reporters: [
+                        {type: 'lcovonly', subdir: '.', file: 'lcov.info'},
+                    ]
+                }
             }
         },
 
@@ -199,7 +220,6 @@ module.exports = function (grunt) {
             }
         },
 
-
         // Run some tasks in parallel to speed up build process
         concurrent: {
             server: {
@@ -212,51 +232,57 @@ module.exports = function (grunt) {
                 }
             }
         }
-
-
     });
 
     grunt.registerTask('build',['jshint','clean:before','less:production', 'dom_munger', 'cssmin', 'ngtemplates','concat','ngAnnotate','uglify','copy','htmlmin','clean:after']);
     grunt.registerTask('serve', ['dom_munger:read','jshint','connect', 'watch']);
     grunt.registerTask('test',['jshint', 'dom_munger:read','karma:all_tests']);
 
-    grunt.registerTask('travis',['jshint', 'dom_munger:read','karma:during_watch']);
+    grunt.registerTask('travis',['jshint', 'dom_munger:read','karma:unit_and_coverage']);
     grunt.registerTask('sample',['concurrent:server']);
 
     grunt.event.on('watch', function(action, filepath) {
-        //https://github.com/gruntjs/grunt-contrib-watch/issues/156
 
-        var tasksToRun = [];
+        var _getSpecFile = function(filepath) {
+            var directoryLastIndex = filepath.lastIndexOf('/');
+            var specFile = [
+                filepath.slice(0, directoryLastIndex),
+                '/_tests',
+                filepath.slice(directoryLastIndex,
+                filepath.length-3), '.spec.js'
+            ].join('');
 
-        if (filepath.lastIndexOf('.js') !== -1 && filepath.lastIndexOf('.js') === filepath.length - 3) {
+            return grunt.file.exists(specFile) ? specFile : null;
+        };
 
-            //lint the changed js file
+
+        var _setKarmaFile = function(filepath) {
+            var files = [].concat(grunt.config('dom_munger.data.appjs'));
+            files.push('bower_components/angular-mocks/angular-mocks.js');
+            if(filepath) { files.push(filepath); }
+            grunt.config('karma.options.files', files);
+        };
+
+
+        if (filepath.lastIndexOf('.js') !== -1) {
+
+            if (filepath.lastIndexOf('.spec.js') !== -1) { _setKarmaFile(filepath); }  // If changing an unit test, then execute it.
+            else {
+                // If not changing an unit test,
+                // then execute find the corresponding unit test and run it.
+                var specPath = _getSpecFile(filepath);
+                if(specPath) { _setKarmaFile(specPath); }
+                else {
+                    grunt.log.error('No tests found for ' + filepath);
+                    _setKarmaFile();
+                }
+            }
+            // JSHint on the modified file
             grunt.config('jshint.main.src', filepath);
-            tasksToRun.push('jshint');
-
-            //find the appropriate unit test for the changed file
-            var spec = filepath;
-            if (filepath.lastIndexOf('.spec.js') === -1 || filepath.lastIndexOf('.spec.js') !== filepath.length - 8) {
-                spec = filepath.substring(0,filepath.length - 3) + '.spec.js';
-            }
-
-            //if the spec exists then lets run it
-            if (grunt.file.exists(spec)) {
-                var files = [].concat(grunt.config('dom_munger.data.appjs'));
-                files.push('bower_components/angular-mocks/angular-mocks.js');
-                files.push(spec);
-                grunt.config('karma.options.files', files);
-                tasksToRun.push('karma:during_watch');
-            }
+        } else {
+            grunt.config('jshint.main.src', []);
+            grunt.config('karma.options.files', []);
         }
-
-        //if index.html changed, we need to reread the <script> tags so our next run of karma
-        //will have the correct environment
-        if (filepath === 'index.html') {
-            tasksToRun.push('dom_munger:read');
-        }
-
-        grunt.config('watch.main.tasks',tasksToRun);
 
     });
 };

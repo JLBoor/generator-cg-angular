@@ -28,7 +28,7 @@ module.exports = function (config) {
             'bower_components/angular-mocks/angular-mocks.js',
 
             'app/modules/**/*-config.js',
-            'app/**/*.js',
+            'app/**/*.js'
         ],
 
 
@@ -83,14 +83,8 @@ module.exports = function (config) {
             'karma-chrome-launcher',
             'karma-phantomjs-launcher',
             'karma-firefox-launcher',
-            'karma-coverage',
-            'karma-junit-reporter'
+            'karma-coverage'
         ],
-
-        junitReporter: {
-            outputFile: 'target/karma-reports/TEST-Karma-Results.xml',
-            suite: 'unit'
-        },
 
         coverageReporter: {
             type: 'lcov',

@@ -8,6 +8,7 @@
     "unused": true,
 
     "globals": {
+        "require": true,
         "jQuery": true,
         "angular": true,
         "console": true,

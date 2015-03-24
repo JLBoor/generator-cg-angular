@@ -2,7 +2,7 @@
 [$resource]: https://docs.angularjs.org/api/ngResource/service/$resource
 
 
-# generator-jb-angular [![Build Status](https://travis-ci.org/JLBoor/generator-jb-angular.svg)](https://travis-ci.org/JLBoor/generator-jb-angular) [![Code Climate](https://codeclimate.com/github/JLBoor/generator-jb-angular/badges/gpa.svg)](https://codeclimate.com/github/JLBoor/generator-jb-angular) [![Test Coverage](https://codeclimate.com/github/JLBoor/generator-jb-angular/badges/coverage.svg)](https://codeclimate.com/github/JLBoor/generator-jb-angular)
+# generator-jlb-angular [![Build Status](https://travis-ci.org/JLBoor/generator-jlb-angular.svg)](https://travis-ci.org/JLBoor/generator-jlb-angular) [![Code Climate](https://codeclimate.com/github/JLBoor/generator-jlb-angular/badges/gpa.svg)](https://codeclimate.com/github/JLBoor/generator-jlb-angular) [![Test Coverage](https://codeclimate.com/github/JLBoor/generator-jlb-angular/badges/coverage.svg)](https://codeclimate.com/github/JLBoor/generator-jlb-angular)
 
 >Yeoman Generator for Enterprise Angular Projects. Forked from [cgross/generator-cg-angular](https://github.com/cgross/generator-cg-angular)
 
@@ -22,15 +22,15 @@ Once Node is installed, do:
 
 First, clone this repository *(this step will go away as soon as we are on bower)*
 
-    git clone git@github.com:JLBoor/generator-jb-angular.git
-    cd generator-jb-angular
+    git clone git@github.com:JLBoor/generator-jlb-angular.git
+    cd generator-jlb-angular
     npm link
 
 Then create your awesome app:
 
     mkdir MyNewAwesomeApp
     cd MyNewAwesomeApp
-    yo jb-angular
+    yo jlb-angular
 
 And finally, `grunt sample` and open [http://localhost:9001/app/#/page/company/list](http://localhost:9001/app/#/page/company/list)
 
@@ -48,10 +48,10 @@ Use one of the following username
 
 ### Generators
 #### Modules
-    yo jb-angular:module
+    yo jlb-angular:module
 
 #### Services
-    yo jb-angular:service
+    yo jlb-angular:service
 
 - blank: generates a simple service with no content. Ideal when starting a new business service.
 - $http: generate a rest service that encapsulate all the calls for a specific operation.

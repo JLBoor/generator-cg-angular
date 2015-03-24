@@ -1,21 +1,21 @@
 {
-  "name": "generator-jb-angular",
+  "name": "generator-jlb-angular",
   "version": "0.1.0",
-  "description": "Yeoman Generator for Enterprise Angular projects.",
+  "description": "Yeoman Generator for maintanable AngularJS projects.",
   "keywords": [
     "yeoman-generator",
-    "angular"
+    "angular",
+    "best practices"
   ],
-  "homepage": "https://github.com/JLBoor/generator-jb-angular",
-  "bugs": "https://github.com/JLBoor/generator-jb-angular/issues",
-  "author": {
-    "name": "Jean-Louis Bourgeois",
-    "url": "http://jlboor.github.io/"
+  "homepage": "https://github.com/JLBoor/generator-jlb-angular",
+  "bugs": {
+    "url": "https://github.com/JLBoor/generator-jlb-angular/issues"
   },
+  "author": "Jean-Louis Bourgeois (http://jlboor.github.io/)",
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JLBoor/generator-jb-angular"
+    "url": "https://github.com/JLBoor/generator-jlb-angular"
   },
   "scripts": {
     "test": "mocha"
@@ -33,9 +33,5 @@
   "engines": {
     "node": ">=0.8.0"
   },
-  "licenses": [
-    {
-      "type": "MIT"
-    }
-  ]
+  "license": "MIT"
 }

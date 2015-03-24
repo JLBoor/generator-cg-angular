@@ -1,8 +1,11 @@
 {
   "name": "generator-jb-angular",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Yeoman Generator for Enterprise Angular projects.",
-  "keywords": ["yeoman-generator", "angular"],
+  "keywords": [
+    "yeoman-generator",
+    "angular"
+  ],
   "homepage": "https://github.com/JLBoor/generator-jb-angular",
   "bugs": "https://github.com/JLBoor/generator-jb-angular/issues",
   "author": {

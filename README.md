@@ -4,7 +4,7 @@
 
 # generator-jlb-angular [![Build Status](https://travis-ci.org/JLBoor/generator-jlb-angular.svg)](https://travis-ci.org/JLBoor/generator-jlb-angular) [![Code Climate](https://codeclimate.com/github/JLBoor/generator-jlb-angular/badges/gpa.svg)](https://codeclimate.com/github/JLBoor/generator-jlb-angular) [![Test Coverage](https://codeclimate.com/github/JLBoor/generator-jlb-angular/badges/coverage.svg)](https://codeclimate.com/github/JLBoor/generator-jlb-angular)
 
->Yeoman Generator for Enterprise Angular Projects. Forked from [cgross/generator-cg-angular](https://github.com/cgross/generator-cg-angular)
+>Yeoman Generator for maintainable AngularJS projects. Forked from [cgross/generator-cg-angular](https://github.com/cgross/generator-cg-angular)
 
 This generator follows the [Angular Best Practices](http://jlboor.github.io/angularjs/angular-best-practices-introduction/) *(Work in progress)*.
 

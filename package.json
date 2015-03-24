@@ -1,7 +1,7 @@
 {
   "name": "generator-jlb-angular",
   "version": "0.1.0",
-  "description": "Yeoman Generator for maintanable AngularJS projects.",
+  "description": "Yeoman Generator for maintainable AngularJS projects.",
   "keywords": [
     "yeoman-generator",
     "angular",

@@ -2,7 +2,7 @@
 [$resource]: https://docs.angularjs.org/api/ngResource/service/$resource
 
 
-# generator-jb-angular [![Build Status](https://travis-ci.org/JLBoor/generator-jb-angular.svg)](https://travis-ci.org/JLBoor/generator-jb-angular) [![Code Climate](https://codeclimate.com/github/JLBoor/generator-jb-angular/badges/gpa.svg)](https://codeclimate.com/github/JLBoor/generator-jb-angular)
+# generator-jb-angular [![Build Status](https://travis-ci.org/JLBoor/generator-jb-angular.svg)](https://travis-ci.org/JLBoor/generator-jb-angular) [![Code Climate](https://codeclimate.com/github/JLBoor/generator-jb-angular/badges/gpa.svg)](https://codeclimate.com/github/JLBoor/generator-jb-angular) [![Test Coverage](https://codeclimate.com/github/JLBoor/generator-jb-angular/badges/coverage.svg)](https://codeclimate.com/github/JLBoor/generator-jb-angular)
 
 >Yeoman Generator for Enterprise Angular Projects. Forked from [cgross/generator-cg-angular](https://github.com/cgross/generator-cg-angular)
 

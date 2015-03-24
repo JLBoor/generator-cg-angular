@@ -6,6 +6,7 @@
     "quotmark": "single",
     "undef": true,
     "unused": true,
+    "node": true,
 
     "globals": {
         "require": true,

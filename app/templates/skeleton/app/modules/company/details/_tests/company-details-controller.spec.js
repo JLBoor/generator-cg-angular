@@ -1,4 +1,4 @@
-describe('The companyListController, ', function () {
+describe('The companyDetailsController, ', function () {
 
     var company;
 

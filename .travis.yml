@@ -16,4 +16,4 @@ script:
   - grunt travis
 
 after_script:
-  - codeclimate < cat target/karma-reports/lcov.info
+  - codeclimate < target/karma-reports/lcov.info

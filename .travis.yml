@@ -3,7 +3,7 @@ node_js:
   - '0.12'
 addons:
   code_climate:
-    repo_token: bf97c9368192e73858959fdb7d6a3a3cac58bfd4193bfb9f7ddeb58b4fbe47be
+    repo_token: 84ec30a5e300cf4c18ae0d194c4666a42ed6649c1d57e1c7073675123db6b3e1
 
 before_script:
   - cd app/templates/skeleton

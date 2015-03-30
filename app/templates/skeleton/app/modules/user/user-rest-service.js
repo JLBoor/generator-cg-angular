@@ -1,12 +1,13 @@
 angular.module('user')
+
     .service('userRestService', function($resource, restConfigService) {
 
         var User = $resource(restConfigService.getOperation('/users/:id'), { id: '@id' }, { 'update': { method:'PUT' } });
 
         return {
 
-            list: function() {
-                return User.query().$promise;
+            list: function(PartialPageFilter) {
+                return User.query(PartialPageFilter).$promise;
             },
 
             get: function(id) {

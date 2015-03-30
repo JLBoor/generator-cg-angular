@@ -1,6 +1,7 @@
 angular.module('sampleApp', [
     'ui.bootstrap',
     'ui.router',
+    'components',
     'configuration.rest',
     'configuration.state',
     'configuration.locale',
@@ -33,6 +34,13 @@ angular.module('sampleApp', [
         }];
 
         stateConfigServiceProvider.setHomeState(findHomeState);
+    })
+
+/**
+ * Configure filters and pagination
+ */
+    .config(function(filterableConstants) {
+        filterableConstants.pageSize = 3;
     });
 
 

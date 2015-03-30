@@ -12,14 +12,18 @@
       }
     },
     "modules": [
-        {
+      {
+        "name": "components",
+        "file": "app/modules/components/filterable/filterable-config.js"
+      },
+      {
         "name": "user",
         "file": "app/modules/user/user-config.js"
-        },
-        {
-            "name": "company",
-            "file": "app/modules/company/company-config.js"
-        }
+      },
+      {
+        "name": "company",
+        "file": "app/modules/company/company-config.js"
+      }
     ]
   }
 }

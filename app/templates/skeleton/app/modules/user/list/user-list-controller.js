@@ -1,7 +1,7 @@
 angular.module('user')
 
-    .controller('userListController', function($scope, users) {
+    .controller('userListController', function($scope, filterableUsers) {
 
-        $scope.users = users;
+        $scope.filterableUsers = filterableUsers;
 
     });

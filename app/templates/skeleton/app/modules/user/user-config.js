@@ -21,8 +21,8 @@ angular.module('user', ['configuration.rest', 'configuration.state'])
                 templateUrl: 'modules/user/list/user-list.html',
                 controller: 'userListController',
                 resolve: {
-                    users: function(userRestService) {
-                        return userRestService.list();
+                    filterableUsers: function(filterableService, userRestService) {
+                        return filterableService.makeFilterable(userRestService).filter();
                     }
                 }
             })

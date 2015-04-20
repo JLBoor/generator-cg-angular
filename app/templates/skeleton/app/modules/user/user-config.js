@@ -22,7 +22,9 @@ angular.module('user', ['configuration.rest', 'configuration.state'])
                 controller: 'userListController',
                 resolve: {
                     filterableUsers: function(filterableService, userRestService) {
-                        return filterableService.makeFilterable(userRestService).filter();
+                        var filterable = filterableService.makeFilterable(userRestService);
+                        filterable.setOrderByProperty("name");
+                        return filterable.filter();
                     }
                 }
             })

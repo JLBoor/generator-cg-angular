@@ -18,12 +18,21 @@ angular.module('components.filterable', ['ui.bootstrap.pagination'])
             this.restService = service;
             this.pageNumber = 1;                            // default first page
             this.pageSize = filterableConstants.pageSize;   // default record per page
+            this.orderByProperty = null;
+        };
+
+        Filterable.prototype.setOrderByProperty = function(orderBy) {
+            this.orderByProperty = orderBy;
         };
 
         Filterable.prototype.toQuery = function() {
             var s = (this.pageNumber - 1) * this.pageSize;
             var e = s + this.pageSize;
-            return { _start: s, _end: e};
+            return {
+                _start: s,
+                _end: e,
+                _orderBy: this.orderByProperty
+            };
         };
 
         Filterable.prototype.filter = function(showPage) {
@@ -31,8 +40,11 @@ angular.module('components.filterable', ['ui.bootstrap.pagination'])
             if(showPage) { that.pageNumber = showPage; }
 
             return that.restService.list(that.toQuery()).then(function(response) {
-                that.data = response;
-                that.totalElements = 9; // FIXME Hardcoded for sample app
+                that.data = response.elements;
+                if (response._metadata) {
+                    that.totalElements = response._metadata.totalElements;
+                }
+
                 return that;
             });
         };

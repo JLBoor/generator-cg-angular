@@ -19,6 +19,7 @@ angular.module('components.filterable', ['ui.bootstrap.pagination'])
             this.pageNumber = 1;                            // default first page
             this.pageSize = filterableConstants.pageSize;   // default record per page
             this.orderByProperty = null;
+            this.filterParamns = {};
         };
 
         Filterable.prototype.setOrderByProperty = function(orderBy) {
@@ -28,11 +29,12 @@ angular.module('components.filterable', ['ui.bootstrap.pagination'])
         Filterable.prototype.toQuery = function() {
             var s = (this.pageNumber - 1) * this.pageSize;
             var e = s + this.pageSize;
-            return {
-                _start: s,
-                _end: e,
-                _orderBy: this.orderByProperty
-            };
+
+            this.filterParamns._start = s;
+            this.filterParamns._end = e;
+            this.filterParamns._orderBy = this.orderByProperty;
+
+            return this.filterParamns;
         };
 
         Filterable.prototype.filter = function(showPage) {

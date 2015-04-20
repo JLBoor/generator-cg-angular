@@ -42,11 +42,14 @@ describe('The components.filterable module, ', function () {
             pageable.pageSize = 8;
             var orderBy = "lastName";
             pageable.setOrderByProperty(orderBy);
+            var clientName = "clientName";
+            pageable.filterParamns.name = clientName;
 
             var expectedParamns = {
                 _start: (5 - 1) * 8,
                 _end: 5 * 8,
-                _orderBy: orderBy
+                _orderBy: orderBy,
+                name: clientName
             };
             expect(pageable.toQuery()).toEqual(expectedParamns);
         });

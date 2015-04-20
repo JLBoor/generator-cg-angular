@@ -43,9 +43,10 @@ describe('The authentication module, ', function () {
     }));
 
 
-    describe('has an authenticationController with a $scope.signIn function that', function () {
+    describe('has an authenticationController with a $scope.signIn and a $scope.signOut function that', function () {
 
         var authenticationController;
+        var password = 'pwd';
         var username = 'john';
         var $scope;
 
@@ -55,26 +56,27 @@ describe('The authentication module, ', function () {
 
             spyOn(authenticationService, 'authenticate');
             spyOn(authenticationService, 'isAuthenticated').andReturn($q.when(true));
+            spyOn(authenticationService, 'clear');
         });
 
 
         it('should take the user to the page.home state when the authentication is successful', function () {
             _authenticate(true);
 
-            $scope.signIn(username);
+            $scope.signIn(username, password);
             $rootScope.$apply();
 
-            expect(authenticationService.authenticate).toHaveBeenCalledWith(username);
+            expect(authenticationService.authenticate).toHaveBeenCalledWith(username, password);
             expect($state.go).toHaveBeenCalledWith('page.home');
         });
 
         it('should not change state when the authentication failed', function () {
             _authenticate(false);
 
-            $scope.signIn(username);
+            $scope.signIn(username, password);
             $rootScope.$apply();
 
-            expect(authenticationService.authenticate).toHaveBeenCalledWith(username);
+            expect(authenticationService.authenticate).toHaveBeenCalledWith(username, password);
             expect($state.go).not.toHaveBeenCalled();
         });
     });
@@ -91,15 +93,15 @@ describe('The authentication module, ', function () {
             spyOn(identityService, 'clear').andReturn($q.when(true));
         });
 
-        it('should clear the sessionId and broadcast the auth.logout event when clear is called', function () {
+        it('should clear the currentUserId and broadcast the auth.logout event when clear is called', function () {
 
-            $cookies.sessionId = 'abc';
-            expect($cookies.sessionId).not.toBeUndefined();
+            $cookies.currentUserId = '114';
+            expect($cookies.currentUserId).not.toBeUndefined();
 
             authenticationService.clear();
             $rootScope.$apply();
 
-            expect($cookies.sessionId).toBeUndefined();
+            expect($cookies.currentUserId).toBeUndefined();
             expect($rootScope.$broadcast).toHaveBeenCalledWith('auth.logout');
         });
 
@@ -108,27 +110,23 @@ describe('The authentication module, ', function () {
 
             it('should not do anything when the authentication fails', function () {
 
-                $httpBackend.whenGET(authOperation + '?password=' + user.password + '&username=' + user.username).respond(404);
+                $httpBackend.whenPOST(authOperation, {username : user.username, password: user.password}).respond(404);
 
                 authenticationService.authenticate(user.username, user.password);
                 $httpBackend.flush();
 
                 expect(identityService.update).not.toHaveBeenCalled();
                 expect($rootScope.$broadcast).not.toHaveBeenCalledWith('auth.login');
-                expect($cookies.sessionId).toBeUndefined();
+                expect($cookies.currentUserId).toBeUndefined();
             });
 
-            it('should update the identity, broadcast auth.login and store the sessionId when the authentication works', function () {
+            it('should update the identity, broadcast auth.login and store the currentUserId when the authentication works', function () {
 
                 identityService.update.andReturn(user);
-                $httpBackend.whenGET(authOperation + '?password=' + user.password + '&username=' + user.username).respond(200, [user]);
+                $httpBackend.expectPOST(authOperation, {username : user.username, password: user.password}).respond(user);
 
                 authenticationService.authenticate(user.username, user.password);
                 $httpBackend.flush();
-
-                expect(identityService.update).toHaveBeenCalledWith(jasmine.objectContaining(user));
-                expect($rootScope.$broadcast).toHaveBeenCalledWith('auth.login', user);
-                expect($cookies.sessionId).toBe('0'); // Testing string because it comes from the $cookie service
             });
         });
 
@@ -162,7 +160,7 @@ describe('The authentication module, ', function () {
             it('should return false when there is no identity nor ping valid', function () {
 
                 identityService.getIdentity.andReturn(false);
-                identityService.ping.andReturn($q.reject('No Ping'));
+                identityService.ping.andReturn(false);
 
                 $rootScope.$apply();
 
@@ -174,20 +172,4 @@ describe('The authentication module, ', function () {
         });
 
     });
-
-    describe('is listening to the $stateChangeStart event, and', function () {
-
-        beforeEach(function() {
-            spyOn(authenticationService, 'clear');
-        });
-
-
-        it('should clear the session when transitioning to page.logout', function () {
-            $state.transitionTo('page.logout');
-
-            expect(authenticationService.clear).toHaveBeenCalled();
-        });
-
-    });
-
 });

@@ -1,6 +1,7 @@
 angular.module('sampleApp', [
     'ui.bootstrap',
     'ui.router',
+    'ngCookies',
     'components',
     'configuration.rest',
     'configuration.state',
@@ -16,8 +17,8 @@ angular.module('sampleApp', [
  */
     .config(function(restConfigServiceProvider){
         restConfigServiceProvider.setBaseUrl('http://localhost:9002');
-        restConfigServiceProvider.setAuthenticationOperation('/identities/:id');
-        restConfigServiceProvider.setIdentityOperation('/me/:id');
+        restConfigServiceProvider.setAuthenticationOperation('/authentication');
+        restConfigServiceProvider.setIdentityOperation('/identities/:id');
     })
 
 /**

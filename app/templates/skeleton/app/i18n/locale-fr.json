@@ -32,7 +32,8 @@
             "PAGE": "Page de connexion",
             "USERNAME": "Entrez votre identifiant",
             "PASSWORD": "Entrez votre mot de passe",
-            "ACTION": "Connexion"
+            "ACTION": "Connexion",
+            "INVALID_CREDENTIALS": "Nom d'utilisateur ou mot de passe invalide."
 
         },
         "LOGOUT": {

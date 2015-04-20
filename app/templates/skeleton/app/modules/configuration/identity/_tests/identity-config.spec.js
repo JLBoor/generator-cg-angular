@@ -4,46 +4,55 @@ describe('The identity module, ', function () {
     var $rootScope;
     var $controller;
     var $httpBackend;
+    var $cookies;
 
     var identityService;
+    var authenticationService;
     var identityController;
     var identityOperation;
 
-    beforeEach(module('configuration.identity', function(_restConfigServiceProvider_) {
+
+    beforeEach(module('sampleApp', function(_restConfigServiceProvider_, $translateProvider) {
         _restConfigServiceProvider_.setBaseUrl('/base');
         _restConfigServiceProvider_.setIdentityOperation('/identity');
 
         identityOperation = '/base/identity';
+        // Override translate configuration - http://angular-translate.github.io/docs/#/guide/22_unit-testing-with-angular-translate
+        $translateProvider.translations('en', {});
     }));
 
-    beforeEach(inject(function(_identityService_, _$rootScope_, _$controller_, _$httpBackend_) {
+    beforeEach(inject(function(_identityService_, _authenticationService_, _$rootScope_, _$controller_, _$httpBackend_, _$cookies_) {
 
         $rootScope = _$rootScope_;
         $controller = _$controller_;
         $httpBackend = _$httpBackend_;
+        $cookies = _$cookies_;
 
         $scope = $rootScope.$new();
 
         identityService = _identityService_;
+        authenticationService = _authenticationService_;
 
         identityController = $controller('identityController', { $scope: $scope });
     }));
 
 
     describe('has identityController that', function () {
-        it('should set $scope.identity on auth.login and delete it on auth.logout', function () {
+        it('should set $scope.identity on auth.login and delete it on scope.logout', function () {
 
             var identity = 'id';
             spyOn(identityService, 'getIdentity').andReturn(identity);
+            spyOn(authenticationService, 'clear');
 
             $rootScope.$broadcast('auth.login');
             $rootScope.$apply();
 
             expect($scope.identity).toBe(identity);
 
-            $rootScope.$broadcast('auth.logout');
+            $scope.signOut();
             $rootScope.$apply();
 
+            expect(authenticationService.clear).toHaveBeenCalled();
             expect($scope.identity).toBeUndefined();
         });
     });
@@ -55,39 +64,41 @@ describe('The identity module, ', function () {
             var identity = 'id2';
             identityService.update('id2');
 
-            $httpBackend.expectPUT(identityOperation + '?id=0', { identity: identity }).respond();
             expect(identityService.getIdentity()).toBe(identity);
-
-            $httpBackend.flush();
         });
 
         it('should set $scope.identity on auth.login and delete it on auth.logout', function () {
 
+            identityService.update('id2');
+            expect(identityService.getIdentity()).toBeTruthy();
             identityService.clear();
 
-            $httpBackend.expectPUT(identityOperation + '?id=0', { identity: null }).respond();
             expect(identityService.getIdentity()).toBe(null);
-
-            $httpBackend.flush();
         });
 
         it('should set $scope.identity on auth.login and delete it on auth.logout', function () {
 
+            $cookies.currentUserId = 14;
+            $httpBackend.whenGET(identityOperation + '?id=14').respond( { id: null } );
             identityService.ping();
 
-            $httpBackend.expectGET(identityOperation + '?id=0').respond( { identity: null } );
             expect($httpBackend.flush).toThrow('INVALID SESSION');
         });
 
         it('should set $scope.identity on auth.login and delete it on auth.logout', function () {
 
-            var identity = { username: 'john.doe' };
+            var id = 15;
+            var username = 'john.doe';
+
+            $cookies.currentUserId = id;
             var pingPromise = identityService.ping();
 
-            $httpBackend.expectGET(identityOperation + '?id=0').respond( { identity: identity } );
+            $httpBackend.whenGET(identityOperation + '?id=' + id).respond( { id: id, username: username} );
 
             pingPromise.then(function() {
-                expect(identityService.getIdentity()).toEqual(identity);
+                var identity = identityService.getIdentity();
+                expect(identity.id).toEqual(id);
+                expect(identity.username).toEqual(username);
             });
 
             $httpBackend.flush();

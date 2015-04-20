@@ -56,10 +56,10 @@
 
       <div class="jumbotron">
 
-          <ul class="nav navbar-nav navbar-right nav-main nav-pills pull-right">
+          <ul class="nav navbar-nav navbar-right nav-main nav-pills pull-right" ng-controller="identityController">
               <li><a ng-if="$hasAuthority('page.company.list')" ui-sref="page.company.list" translate>COMPANY.LINK</a></li>
               <li><a ng-if="$hasAuthority('page.user.list')" ui-sref="page.user.list" translate>USER.LINK</a></li>
-              <li dropdown class="dropdown" ng-controller="identityController" >
+              <li dropdown class="dropdown">
                   <a ng-if="identity" dropdown-toggle="" href="" class="dropdown-toggle">
                       <i class="glyphicon glyphicon-user"></i>
                       {{identity.username}} <span class="caret"></span>
@@ -67,7 +67,7 @@
                   <ul class="dropdown-menu" role="menu">
                       <li><a ng-hide="isLang('fr')" ng-click="changeLang('fr')" translate>APP.LANG.FR</a></li>
                       <li><a ng-hide="isLang('en')" ng-click="changeLang('en')" translate>APP.LANG.EN</a></li>
-                      <li><a ui-sref="page.logout" translate>AUTH.LOGOUT.TITLE</a></li>
+                      <li><a ui-sref="page.logout" ng-click="signOut()" translate>AUTH.LOGOUT.TITLE</a></li>
                   </ul>
               </li>
           </ul>

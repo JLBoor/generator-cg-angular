@@ -27,11 +27,9 @@ angular.module('components.filterable', ['ui.bootstrap.pagination'])
         };
 
         Filterable.prototype.toQuery = function() {
-            var s = (this.pageNumber - 1) * this.pageSize;
-            var e = s + this.pageSize;
 
-            this.filterParamns._start = s;
-            this.filterParamns._end = e;
+            this.filterParamns._pageNumber = this.pageNumber;
+            this.filterParamns._pageSize = this.pageSize;
             this.filterParamns._orderBy = this.orderByProperty;
 
             return this.filterParamns;

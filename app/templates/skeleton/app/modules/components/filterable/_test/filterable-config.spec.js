@@ -46,8 +46,8 @@ describe('The components.filterable module, ', function () {
             pageable.filterParamns.name = clientName;
 
             var expectedParamns = {
-                _start: (5 - 1) * 8,
-                _end: 5 * 8,
+                _pageNumber: pageable.pageNumber,
+                _pageSize: pageable.pageSize,
                 _orderBy: orderBy,
                 name: clientName
             };

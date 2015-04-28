@@ -8,7 +8,6 @@ describe('The rest module, ', function () {
     beforeEach(module('configuration.rest', function(_restConfigServiceProvider_) {
         _restConfigServiceProvider_.setBaseUrl(baseUrl);
         _restConfigServiceProvider_.setIdentityOperation(identityOperation);
-        _restConfigServiceProvider_.setAuthenticationOperation(authenticationOperation);
     }));
 
     beforeEach(inject(function(_restConfigService_) {
@@ -17,10 +16,6 @@ describe('The rest module, ', function () {
 
 
     describe('has a restConfigService that', function () {
-
-        it('should build the authentication operation', function () {
-            expect(restConfigService.getAuthenticationOperation()).toBe(baseUrl + authenticationOperation);
-        });
 
         it('should build the identity operation', function () {
             expect(restConfigService.getIdentityOperation()).toBe(baseUrl + identityOperation);

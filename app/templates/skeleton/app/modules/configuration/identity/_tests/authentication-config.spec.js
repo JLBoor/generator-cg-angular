@@ -1,7 +1,7 @@
 describe('The authentication module, ', function () {
 
     var authenticationService;
-    var authOperation;
+    var identityOperation;
     var identityService;
 
     var $httpBackend;
@@ -21,9 +21,9 @@ describe('The authentication module, ', function () {
 
     beforeEach(module('configuration.identity.authentication', function(_restConfigServiceProvider_) {
         _restConfigServiceProvider_.setBaseUrl('/base');
-        _restConfigServiceProvider_.setAuthenticationOperation('/auth');
+        _restConfigServiceProvider_.setIdentityOperation('/me');
 
-        authOperation = '/base/auth';
+        identityOperation = '/base/me';
     }));
 
     beforeEach(inject(function(_authenticationService_, _identityService_, _$httpBackend_, _$rootScope_, _$controller_, _$state_, _$q_, _$cookies_) {
@@ -88,15 +88,11 @@ describe('The authentication module, ', function () {
         beforeEach(function() {
             spyOn($rootScope, '$broadcast').andCallThrough();
 
-            spyOn(identityService, 'ping');
             spyOn(identityService, 'getIdentity');
             spyOn(identityService, 'clear').andReturn($q.when(true));
         });
 
-        it('should clear the currentUserId and broadcast the auth.logout event when clear is called', function () {
-
-            $cookies.currentUserId = '114';
-            expect($cookies.currentUserId).not.toBeUndefined();
+        it('should broadcast the auth.logout event when clear is called', function () {
 
             authenticationService.clear();
             $rootScope.$apply();
@@ -110,20 +106,19 @@ describe('The authentication module, ', function () {
 
             it('should not do anything when the authentication fails', function () {
 
-                $httpBackend.whenPOST(authOperation, {username : user.username, password: user.password}).respond(404);
+                $httpBackend.whenGET(identityOperation).respond(404);
 
                 authenticationService.authenticate(user.username, user.password);
                 $httpBackend.flush();
 
                 expect(identityService.update).not.toHaveBeenCalled();
                 expect($rootScope.$broadcast).not.toHaveBeenCalledWith('auth.login');
-                expect($cookies.currentUserId).toBeUndefined();
             });
 
-            it('should update the identity, broadcast auth.login and store the currentUserId when the authentication works', function () {
+            it('should call the identity operation for authentication', function () {
 
                 identityService.update.andReturn(user);
-                $httpBackend.expectPOST(authOperation, {username : user.username, password: user.password}).respond(user);
+                $httpBackend.expectGET(identityOperation).respond(user);
 
                 authenticationService.authenticate(user.username, user.password);
                 $httpBackend.flush();
@@ -132,42 +127,20 @@ describe('The authentication module, ', function () {
 
         describe('has an isAuthenticated service that', function () {
 
-            it('should return true when there is an identity and broadcast auth.login', function () {
+            it('should return true when there is an identity', function () {
 
                 identityService.getIdentity.andReturn(user);
 
-                authenticationService.isAuthenticated().then(function (isAuthenticated) {
-                    expect(isAuthenticated).toBe(true);
-                    expect($rootScope.$broadcast).toHaveBeenCalledWith('auth.login', user);
-                });
-
-                $rootScope.$apply();
+                expect(authenticationService.isAuthenticated()).toBeTruthy();
             });
 
-            it('should return true and broadcast auth.login when there is no identity but the ping is still valid ', function () {
+            it('should return false when there is no identity', function () {
 
-                identityService.getIdentity.andReturn(false);
-                identityService.ping.andReturn(user);
-
-                $rootScope.$apply();
-
-                authenticationService.isAuthenticated().then(function (isAuthenticated) {
-                    expect(isAuthenticated).toBe(true);
-                    expect($rootScope.$broadcast).toHaveBeenCalledWith('auth.login', user);
-                });
-            });
-
-            it('should return false when there is no identity nor ping valid', function () {
-
-                identityService.getIdentity.andReturn(false);
-                identityService.ping.andReturn(false);
+                identityService.getIdentity.andReturn(null);
 
                 $rootScope.$apply();
 
-                authenticationService.isAuthenticated().then(function (isAuthenticated) {
-                    expect(isAuthenticated).toBe(false);
-                    expect($rootScope.$broadcast).not.toHaveBeenCalled();
-                });
+                expect(authenticationService.isAuthenticated()).toBeFalsy();
             });
         });
 

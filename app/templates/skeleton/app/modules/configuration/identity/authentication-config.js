@@ -1,15 +1,16 @@
 angular.module('configuration.identity.authentication', ['configuration.identity', 'configuration.state', 'ngCookies', 'ui.router'])
 
-    .controller('authenticationController', function($scope, $state, $location, authenticationService) {
+    .controller('authenticationController', function($scope, $state, $rootScope, authenticationService, identityService) {
 
         $scope.signIn = function (username, password) {
 
             authenticationService.authenticate(username, password)
                 .then(function (identity) {
                     $scope.authenticationError = false;
-                    authenticationService.setCredentials(identity, password);
+                    identityService.update(identity);
+                    $rootScope.$broadcast('auth.login', identity);
                     $state.go('page.home');
-                }, function (error) {
+                }, function () {
                     $scope.authenticationError = true;
                 });
         };
@@ -17,41 +18,27 @@ angular.module('configuration.identity.authentication', ['configuration.identity
 
     .service('authenticationService', function($q, $http, $resource, $cookies, $rootScope, restConfigService, identityService, Base64) {
 
-        var Authentication = $resource(restConfigService.getAuthenticationOperation());
-
-        var _loginEvent = function(identity) { $rootScope.$broadcast('auth.login', identity); };
         var _logoutEvent = function() { $rootScope.$broadcast('auth.logout'); };
 
         return {
 
             clear: function () {
-                delete $cookies.currentUserId;
                 $http.defaults.headers.common.Authorization = 'Basic ';
                 _logoutEvent();
                 identityService.clear();
             },
 
             authenticate: function (username, password, callback) {
-                return Authentication.save({username : username, password: password}).$promise;
-            },
-
-            setCredentials: function (identity, password) {
-                var authData = Base64.encode(identity.username + ':' + password);
-                identity.authData = authData;
-                identityService.update(identity);
-
-                $cookies.currentUserId = identity.id;
+                var authData = Base64.encode(username + ':' + password);
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + authData;
-                //_loginEvent();
+
+                var Identity = $resource(restConfigService.getIdentityOperation());
+
+                return Identity.get().$promise;
             },
 
             isAuthenticated: function() {
-                return $q.when(identityService.getIdentity() || identityService.ping())
-                    .then(function(identity) {
-                        if(!identity) { return false; }
-                        _loginEvent(identity);
-                        return true;
-                    }, function() { return false; });
+                return identityService.getIdentity() !== null;
             }
         };
     })
@@ -158,20 +145,19 @@ angular.module('configuration.identity.authentication', ['configuration.identity
             });
     })
 
-    .run(function($rootScope, $state, authenticationService) {
-
+    .run(function($rootScope, $state, $log, authenticationService) {
         $rootScope.$on('$stateChangeStart', function (event, toState) {
-            authenticationService.isAuthenticated().then(function(isAuthenticated) {
+            var isAuthenticated = authenticationService.isAuthenticated();
 
-                if(toState.name !== 'page.login' && !isAuthenticated) {
-                    $state.go('page.login');
-                    event.preventDefault();
-                }
-                else if(toState.name === 'page.login' && isAuthenticated) {
-                    $state.go('page.home');
-                    event.preventDefault();
-                }
-
-            });
+            if(toState.name !== 'page.login' && !isAuthenticated) {
+                $log.debug('user not authenticated, redirecting to page.login');
+                $state.go('page.login');
+                event.preventDefault();
+            }
+            else if(toState.name === 'page.login' && isAuthenticated) {
+                $log.debug('user trying to reach page.login but is already authenticated. Redirecting to page.home');
+                $state.go('page.home');
+                event.preventDefault();
+            }
         });
     });

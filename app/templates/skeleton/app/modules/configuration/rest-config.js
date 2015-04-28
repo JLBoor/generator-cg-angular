@@ -8,10 +8,6 @@ angular.module('configuration.rest', ['ngResource'])
 
         var RestConfigService = function() {
 
-            this.getAuthenticationOperation = function() {
-                return baseUrl + authenticationOperation;
-            };
-
             this.getIdentityOperation = function() {
                 return baseUrl + identityOperation;
             };
@@ -22,7 +18,6 @@ angular.module('configuration.rest', ['ngResource'])
         };
 
         this.setBaseUrl = function(url) { baseUrl = url; };
-        this.setAuthenticationOperation = function(op) { authenticationOperation = op; };
         this.setIdentityOperation = function(op) { identityOperation = op; };
 
         this.$get = [function() {

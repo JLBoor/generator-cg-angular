@@ -30,14 +30,12 @@ angular.module('configuration.identity.authority', ['configuration.identity', 'c
 
     })
 
-    .run(function($rootScope, $state, authenticationService, authorityService) {
+    .run(function ($rootScope, $state, $log, authenticationService, authorityService) {
         $rootScope.$on('$stateChangeStart', function (event, toState) {
-            authenticationService.isAuthenticated().then(function() {
-                if (toState.name !== 'page.errors.403' && !authorityService.hasAuthority(toState.name)) {
-                    $state.go('page.errors.403');
-                    event.preventDefault();
-                }
-            });
-
+            if (toState.name !== 'page.errors.403' && !authorityService.hasAuthority(toState.name)) {
+                $log.debug('user does not have authority to ' + toState.name +' redirecting to page.errors.403');
+                $state.go('page.errors.403');
+                event.preventDefault();
+            }
         });
     });

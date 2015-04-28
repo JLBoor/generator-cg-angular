@@ -41,15 +41,40 @@ module.exports = function (grunt) {
         connect: {
             main: {
                 options: {
-                    port: 9001
-                }
+                    port: 9001,
+                    host: 'localhost',
+                    base: '',
+                    middleware: function (connect, options) {
+                        var proxy = require('grunt-connect-proxy/lib/utils').proxyRequest;
+                        return [
+                            // Include the proxy first
+                            proxy,
+                            // Serve static files.
+                            connect.static(options.base),
+                            // Make empty directories browsable.
+                            connect.directory(options.base)
+                        ];
+                    }
+                },
+                proxies: [
+                    {
+                        context: '/rest',
+                        host: 'localhost',
+                        port: 9002,
+                        https: false,
+                        forward: false,
+                        rewrite: {
+                            '^/rest': '/'
+                        }
+                    }
+                ]
             }
         },
         watch: {
             main: {
                 options: {
-                    livereload: true,
-                    livereloadOnError: false,
+                    //livereload: true,
+                    //livereloadOnError: false,
                     spawn: false
                 },
                 files: [createFolderGlobs(['app/**/*.js','app/**/*.html']),'!_SpecRunner.html','!.grunt'],
@@ -235,7 +260,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('build',['jshint','clean:before','less:production', 'dom_munger', 'cssmin', 'ngtemplates','concat','ngAnnotate','uglify','copy','htmlmin','clean:after']);
-    grunt.registerTask('serve', ['dom_munger:read','jshint','connect', 'watch']);
+    grunt.registerTask('serve', ['dom_munger:read','jshint', 'configureProxies:main', 'connect:main', 'watch']);
     grunt.registerTask('test',['jshint', 'dom_munger:read','karma:all_tests']);
 
     grunt.registerTask('travis',['jshint', 'dom_munger:read','karma:unit_and_coverage']);

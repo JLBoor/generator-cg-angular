@@ -2,6 +2,8 @@ angular.module('configuration.identity', ['configuration.rest', 'ngCookies', 'ui
 
     .controller('identityController', function($scope, identityService, authenticationService) {
 
+        $scope.identity = identityService.getIdentity();
+
         $scope.$on('auth.login', function() {
             $scope.identity = identityService.getIdentity();
         });
@@ -12,40 +14,36 @@ angular.module('configuration.identity', ['configuration.rest', 'ngCookies', 'ui
         };
     })
 
-    .service('identityService', function($q, $http, $resource, $cookies, restConfigService) {
+    .service('identityService', function($q, $http, $resource, $cookies, $log, restConfigService) {
 
         var identity;
-        var Identity = $resource(restConfigService.getIdentityOperation(), null, { 'update': { method: 'PUT' } });
+        var Identity = $resource(restConfigService.getIdentityOperation());
+
 
         return {
 
             getIdentity: function () {
-                return identity;
+                if (identity) {
+                    return identity;
+                }
+
+                if($cookies.username) {
+                    identity = {username: $cookies.username, authorities: $cookies.authorities.split(",")};
+                    return identity;
+                }
+                return null;
             },
 
             update: function (newIdentity) {
                 identity = newIdentity;
-            },
-
-            ping: function () {
-                if(!$cookies.currentUserId) {
-                    return null;
-                }
-
-                return Identity.get({id: $cookies.currentUserId}).$promise.then(function(responseIdentity) {
-
-                    if(!responseIdentity || !responseIdentity.id) {
-                        delete $cookies.currentUserId;
-                        throw 'INVALID SESSION';
-                    }
-
-                    identity = responseIdentity;
-                    return identity;
-                });
+                $cookies.username = identity.username;
+                $cookies.authorities = identity.authorities.join();
             },
 
             clear: function() {
-                return this.update(null);
+                identity = null;
+                delete $cookies.username;
+                delete $cookies.authorities;
             }
         };
     });

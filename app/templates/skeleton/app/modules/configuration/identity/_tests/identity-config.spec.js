@@ -59,51 +59,26 @@ describe('The identity module, ', function () {
 
 
     describe('has identityService that', function () {
-        it('should set $scope.identity on auth.login and delete it on auth.logout', function () {
+        it('should set the identity', function () {
 
-            var identity = 'id2';
-            identityService.update('id2');
+            var identity = {username: "user", authorities: ["company", "user"]};
+            identityService.update(identity);
 
             expect(identityService.getIdentity()).toBe(identity);
         });
 
-        it('should set $scope.identity on auth.login and delete it on auth.logout', function () {
+        it('should set the identity and username cookie with update() and clear it with clear()', function () {
+            var identity = {username: "user", authorities: ["company", "user"]};
 
-            identityService.update('id2');
-            expect(identityService.getIdentity()).toBeTruthy();
+            identityService.update(identity);
+            expect(identityService.getIdentity()).toBe(identity);
+
+            expect($cookies.username).toBe("user");
+
             identityService.clear();
-
             expect(identityService.getIdentity()).toBe(null);
+            expect($cookies.username).toBeFalsy();
         });
-
-        it('should set $scope.identity on auth.login and delete it on auth.logout', function () {
-
-            $cookies.currentUserId = 14;
-            $httpBackend.whenGET(identityOperation + '?id=14').respond( { id: null } );
-            identityService.ping();
-
-            expect($httpBackend.flush).toThrow('INVALID SESSION');
-        });
-
-        it('should set $scope.identity on auth.login and delete it on auth.logout', function () {
-
-            var id = 15;
-            var username = 'john.doe';
-
-            $cookies.currentUserId = id;
-            var pingPromise = identityService.ping();
-
-            $httpBackend.whenGET(identityOperation + '?id=' + id).respond( { id: id, username: username} );
-
-            pingPromise.then(function() {
-                var identity = identityService.getIdentity();
-                expect(identity.id).toEqual(id);
-                expect(identity.username).toEqual(username);
-            });
-
-            $httpBackend.flush();
-        });
-
     });
 
 });

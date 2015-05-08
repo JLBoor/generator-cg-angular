@@ -42,6 +42,7 @@ angular.module('sampleApp', [
  */
     .config(function(filterableConstants) {
         filterableConstants.pageSize = 3;
+        filterableConstants.maxSize = 3;
     });
 
 

@@ -1,6 +1,6 @@
 angular.module('configuration.identity', ['configuration.rest', 'ngCookies', 'ui.router'])
 
-    .controller('identityController', function($scope, identityService, authenticationService) {
+    .controller('identityController', function($scope, identityService, authenticationService, $resource, restConfigService) {
 
         $scope.identity = identityService.getIdentity();
 
@@ -9,6 +9,7 @@ angular.module('configuration.identity', ['configuration.rest', 'ngCookies', 'ui
         });
 
         $scope.signOut = function () {
+            $resource(restConfigService.getLogoutOperation()).delete();
             delete $scope.identity;
             authenticationService.clear();
         };

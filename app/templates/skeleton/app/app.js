@@ -18,6 +18,7 @@ angular.module('sampleApp', [
     .config(function(restConfigServiceProvider){
         restConfigServiceProvider.setBaseUrl('http://localhost:9001/rest');
         restConfigServiceProvider.setIdentityOperation('/me');
+	restConfigServiceProvider.setLogoutOperation('/signOut');
     })
 
 /**

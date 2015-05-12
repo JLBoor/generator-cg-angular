@@ -32,7 +32,8 @@
             "PAGE": "Login page",
             "USERNAME": "Enter username",
             "PASSWORD": "Enter password",
-            "ACTION": "Sign-in"
+            "ACTION": "Sign-in",
+            "INVALID_CREDENTIALS": "Invalid username or password."
 
         },
         "LOGOUT": {

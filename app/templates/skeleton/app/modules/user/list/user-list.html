@@ -7,16 +7,21 @@
     </a>
 </h2>
 
+<form class="form-horizontal">
+    <div class="col-md-5">
+        <input type="text" class="form-control" id="name" ng-model="filterParamns.name" ng-change="filterableUsers.filter()">
+    </div>
+</form>
 <table class="table table-hover">
     <thead>
         <tr>
-            <th translate>USER.PROPERTY_NAME</th>
-            <th translate>USER.PROPERTY_EMAIL</th>
-            <th class="text-right" translate>COMMON.HEADER.ACTIONS</th>
+            <th class="col-md-5" translate>USER.PROPERTY_NAME</th>
+            <th class="col-md-5" translate>USER.PROPERTY_EMAIL</th>
+            <th class="col-md-2" class="text-right" translate>COMMON.HEADER.ACTIONS</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="user in filterableUsers.data | orderBy:'name'">
+        <tr ng-repeat="user in filterableUsers.data">
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td class="text-right">

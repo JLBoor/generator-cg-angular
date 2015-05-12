@@ -3,18 +3,22 @@ angular.module('company')
 
         var listOperation = restConfigService.getOperation('/companies');
 
-        var _processResponse = function(response) {
-            return response.data;
-        };
-
         return {
 
-            list: function() {
-                return $http.get(listOperation).then(_processResponse);
+            list: function () {
+                return $http.get(listOperation).then(function (response) {
+                    var data = response.data;
+                    if(response.data) {
+                        return data.elements;
+                    }
+                    return response;
+                });
             },
 
-            get: function(id) {
-                return $http.get(listOperation + '/' + id).then(_processResponse);
+            get: function (id) {
+                return $http.get(listOperation + '/' + id).then(function (response) {
+                    return response.data;
+                });
             },
 
             create: function(company) {

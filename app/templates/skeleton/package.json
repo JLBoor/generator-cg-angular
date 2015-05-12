@@ -22,7 +22,7 @@
         "grunt-dom-munger": "~3.4",
         "grunt-json-server": "~0.1",
         "grunt-karma": "~0.8.3",
-        "grunt-ng-annotate": "~0.5",
+        "grunt-ng-annotate": "~0.10",
         "karma": "~0.12.6",
         "karma-coverage": "~0.2",
         "karma-chrome-launcher": "~0.1.3",

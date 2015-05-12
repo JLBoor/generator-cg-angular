@@ -7,7 +7,7 @@ angular.module('user')
         return {
 
             list: function(PartialPageFilter) {
-                return User.query(PartialPageFilter).$promise;
+                return User.get(PartialPageFilter).$promise;
             },
 
             get: function(id) {

@@ -10,7 +10,8 @@ angular.module('sampleApp', [
     'configuration.identity.authority',
     'configuration.identity.authentication',
     'company',
-    'user'])
+    'user',
+    'ngFileUpload'])
 
 /**
  * Configure rest URL

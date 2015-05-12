@@ -3,7 +3,7 @@
     {{company.name}}
     <small>{{ isEditing ? 'COMPANY.ACTION_UPDATE' : 'COMPANY.ACTION_CREATE' | translate }}</small>
 </h2>
-<!-- this is to see if we can generate this -->
+
 
 <div class="container">
     <div class="row">
@@ -44,11 +44,9 @@
                 <div class="form-group">
                     <label for="companyImage" class="col-sm-4 control-label" translate>COMPANY.PROPERTY_IMAGE</label>
                     <div class="col-sm-8">
-                        <input class="form-control-static" type="file" id="companyImage" ngf-select="" ng-model="selectedFile" name="file" accept="image/*">
-                        <img ngf-src="selectedFile[0]" class="img-thumbnail">
-<!--
-                        <button ng-click="upload(selectedFile)">Submit</button>
--->
+                        <input class="form-control-static" type="file" id="companyImage" ngf-select="" ng-model="image" name="file" accept="image/*"  ngf-max-size='10240' ng-model-rejected="rejFiles">
+                        <img ng-hide="rejFiles" ng-if="image[0]" ngf-src="image[0]" class="img-thumbnail">
+                        <div ng-show="rejFiles" class="text-danger" translate>COMPANY.INVALID_IMAGE_FILE</div>
                     </div>
                 </div>
 

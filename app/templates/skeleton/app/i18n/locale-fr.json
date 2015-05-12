@@ -61,7 +61,8 @@
         "ACTION_CREATE": "Créer",
         "ACTION_CANCEL": "annuler",
         "ACTION_UPDATE": "Mettre à jour",
-        "ACTION_DELETE": "Supprimer"
+        "ACTION_DELETE": "Supprimer",
+        "INVALID_IMAGE_FILE": "Les fichiers doivent être les images valides , à moins de 10MB en taille."
     },
 
     "USER": {

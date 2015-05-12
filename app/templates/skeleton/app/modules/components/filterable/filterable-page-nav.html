@@ -3,5 +3,9 @@
         ng-model="filterable.pageNumber"
         items-per-page="filterable.pageSize"
         total-items="filterable.totalElements"
+        rotate="filterable.rotate"
+        max-size="filterable.maxSize"
+        boundary-links="filterable.boundaryLinks"
+        direction-links="filterable.directionLinks"
         ng-change="filterable.filter(filterable.pageNumber)">
 </pagination>

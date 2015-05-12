@@ -10,18 +10,23 @@ describe('The identity module, ', function () {
     var authenticationService;
     var identityController;
     var identityOperation;
+    var logoutOperation;
+    var restConfigService;
 
 
     beforeEach(module('sampleApp', function(_restConfigServiceProvider_, $translateProvider) {
         _restConfigServiceProvider_.setBaseUrl('/base');
         _restConfigServiceProvider_.setIdentityOperation('/identity');
+	_restConfigServiceProvider_.setLogoutOperation('/signOut');
 
         identityOperation = '/base/identity';
+	logoutOperation = '/base/signOut';
+
         // Override translate configuration - http://angular-translate.github.io/docs/#/guide/22_unit-testing-with-angular-translate
         $translateProvider.translations('en', {});
     }));
 
-    beforeEach(inject(function(_identityService_, _authenticationService_, _$rootScope_, _$controller_, _$httpBackend_, _$cookies_) {
+    beforeEach(inject(function(_identityService_, _authenticationService_, _$rootScope_, _$controller_, _$httpBackend_, _$cookies_, _restConfigService_) {
 
         $rootScope = _$rootScope_;
         $controller = _$controller_;
@@ -32,6 +37,7 @@ describe('The identity module, ', function () {
 
         identityService = _identityService_;
         authenticationService = _authenticationService_;
+	restConfigService = _restConfigService_;
 
         identityController = $controller('identityController', { $scope: $scope });
     }));
@@ -49,11 +55,14 @@ describe('The identity module, ', function () {
 
             expect($scope.identity).toBe(identity);
 
+	    $httpBackend.expectDELETE(logoutOperation).respond(200);
+
             $scope.signOut();
             $rootScope.$apply();
 
             expect(authenticationService.clear).toHaveBeenCalled();
             expect($scope.identity).toBeUndefined();
+
         });
     });
 

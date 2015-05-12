@@ -16,8 +16,9 @@ angular.module('sampleApp', [
  * Configure rest URL
  */
     .config(function(restConfigServiceProvider){
-        restConfigServiceProvider.setBaseUrl('http://localhost:9001/rest');
+        restConfigServiceProvider.setBaseUrl('/rest');
         restConfigServiceProvider.setIdentityOperation('/me');
+	restConfigServiceProvider.setLogoutOperation('/signOut');
     })
 
 /**
@@ -41,6 +42,7 @@ angular.module('sampleApp', [
  */
     .config(function(filterableConstants) {
         filterableConstants.pageSize = 3;
+        filterableConstants.maxSize = 3;
     });
 
 

@@ -11,11 +11,11 @@
                 </div>
                 <form>
                     <div class="form-group">
-                        <input ng-model="user.username" type="text" class="form-control" id="username" placeholder="{{ 'AUTH.LOGIN.USERNAME' | translate }}">
+                        <input ng-keyup="$event.keyCode == 13 && signIn(user.username, user.password)" ng-model="user.username" type="text" class="form-control" id="username" placeholder="{{ 'AUTH.LOGIN.USERNAME' | translate }}">
                     </div>
 
                     <div class="form-group">
-                        <input ng-model="user.password" type="password" class="form-control" id="password" placeholder="{{ 'AUTH.LOGIN.PASSWORD' | translate }}">
+                        <input ng-keyup="$event.keyCode == 13 && signIn(user.username, user.password)" ng-model="user.password" type="password" class="form-control" id="password" placeholder="{{ 'AUTH.LOGIN.PASSWORD' | translate }}">
                     </div>
 
                     <button ng-click="signIn(user.username, user.password)" type="button" class="center-block btn btn-success" title="{{ 'AUTH.LOGIN.ACTION' | translate }}">

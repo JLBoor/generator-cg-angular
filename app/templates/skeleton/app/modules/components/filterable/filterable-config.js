@@ -9,7 +9,11 @@ angular.module('components.filterable', ['ui.bootstrap.pagination'])
     })
 
     .constant('filterableConstants', {
-        pageSize: 10
+        pageSize: 10,
+        rotate: false, // if 'true', current page is displayed in the middle of the page list
+        maxSize: null,      // maximum number of individual page links to show (ellipses will show if rotate = 'false')
+        boundaryLinks: true,  // show first/last buttons
+        directionLinks: true  // show next/previous buttons
     })
 
     .service('filterableService', function(filterableConstants) {
@@ -18,6 +22,10 @@ angular.module('components.filterable', ['ui.bootstrap.pagination'])
             this.restService = service;
             this.pageNumber = 1;                            // default first page
             this.pageSize = filterableConstants.pageSize;   // default record per page
+            this.rotate = filterableConstants.rotate;
+            this.maxSize = filterableConstants.maxSize;
+            this.boundaryLinks = filterableConstants.boundaryLinks;
+            this.directionLinks = filterableConstants.directionLinks;
             this.orderByProperty = null;
             this.filterParamns = {};
         };

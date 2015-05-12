@@ -27,7 +27,7 @@ angular.module('components.filterable', ['ui.bootstrap.pagination'])
             this.boundaryLinks = filterableConstants.boundaryLinks;
             this.directionLinks = filterableConstants.directionLinks;
             this.orderByProperty = null;
-            this.filterParamns = {};
+            this.filterParams = {};
         };
 
         Filterable.prototype.setOrderByProperty = function(orderBy) {
@@ -36,11 +36,11 @@ angular.module('components.filterable', ['ui.bootstrap.pagination'])
 
         Filterable.prototype.toQuery = function() {
 
-            this.filterParamns._pageNumber = this.pageNumber;
-            this.filterParamns._pageSize = this.pageSize;
-            this.filterParamns._orderBy = this.orderByProperty;
+            this.filterParams._pageNumber = this.pageNumber;
+            this.filterParams._pageSize = this.pageSize;
+            this.filterParams._orderBy = this.orderByProperty;
 
-            return this.filterParamns;
+            return this.filterParams;
         };
 
         Filterable.prototype.filter = function(showPage) {

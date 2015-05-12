@@ -43,7 +43,7 @@ describe('The components.filterable module, ', function () {
             var orderBy = "lastName";
             pageable.setOrderByProperty(orderBy);
             var clientName = "clientName";
-            pageable.filterParamns.name = clientName;
+            pageable.filterParams.name = clientName;
 
             var expectedParamns = {
                 _pageNumber: pageable.pageNumber,

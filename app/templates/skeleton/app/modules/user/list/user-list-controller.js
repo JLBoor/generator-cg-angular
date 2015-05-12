@@ -3,7 +3,7 @@ angular.module('user')
     .controller('userListController', function($scope, filterableUsers) {
 
         $scope.filterableUsers = filterableUsers;
-        $scope.filterParamns = {};
-        filterableUsers.filterParamns = $scope.filterParamns;
+        $scope.filterParams = {};
+        filterableUsers.filterParams = $scope.filterParams;
 
     });

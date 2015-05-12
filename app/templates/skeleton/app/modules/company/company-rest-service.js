@@ -27,7 +27,7 @@ angular.module('company')
                     method: isEditing ? 'PUT' : 'POST',
                     file: imageFile,
                     data: company
-                })
+                });
             },
 
             delete: function(company) {

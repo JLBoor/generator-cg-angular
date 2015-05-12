@@ -54,6 +54,7 @@
         "PROPERTY_ID": "Id",
         "PROPERTY_ADDRESS": "Adresse",
         "PROPERTY_PHONE": "Téléphone",
+        "PROPERTY_IMAGE": "Image",
         "PROPERTY_LASTNAME": "Nom",
         "PROPERTY_FIRSTNAME": "Prénom",
 

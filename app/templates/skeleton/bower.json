@@ -21,6 +21,7 @@
     "moment": "~2.9",
     "font-awesome": "~4.3",
     "ng-file-upload": "~4.1.4",
-    "ng-file-upload-shim": "~4.1.4"
+    "ng-file-upload-shim": "~4.1.4",
+    "less": "~2.5.0"
   }
 }

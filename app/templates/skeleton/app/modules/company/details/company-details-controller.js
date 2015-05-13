@@ -7,6 +7,7 @@ angular.module('company')
         $scope.company = company;
         $scope.isEditing = company && company.id;
         $scope.image = $scope.$rejectedFiles ? null : $scope.image;
+        $scope.imageSizeLimit = 1024*1024*10;
 
         $scope.delete = function() {
             companyRestService.delete($scope.company)

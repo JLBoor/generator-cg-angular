@@ -1,4 +1,4 @@
-angular.module('company', ['configuration.state', 'configuration.rest'])
+angular.module('company', ['configuration.state', 'configuration.rest', 'ngFileUpload'])
 
 /**
  * Configure states

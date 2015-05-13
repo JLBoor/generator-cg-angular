@@ -3,6 +3,9 @@ describe('The authentication module, ', function () {
     var authenticationService;
     var identityOperation;
     var identityService;
+    var logoutOperation;
+
+    var restConfigService;
 
     var $httpBackend;
     var $controller;
@@ -22,13 +25,16 @@ describe('The authentication module, ', function () {
     beforeEach(module('configuration.identity.authentication', function(_restConfigServiceProvider_) {
         _restConfigServiceProvider_.setBaseUrl('/base');
         _restConfigServiceProvider_.setIdentityOperation('/me');
+        _restConfigServiceProvider_.setLogoutOperation('/signOut');
 
         identityOperation = '/base/me';
+        logoutOperation = '/base/signOut';
     }));
 
-    beforeEach(inject(function(_authenticationService_, _identityService_, _$httpBackend_, _$rootScope_, _$controller_, _$state_, _$q_, _$cookies_) {
+    beforeEach(inject(function(_authenticationService_, _identityService_, _$httpBackend_, _$rootScope_, _$controller_, _$state_, _$q_, _$cookies_, _restConfigService_) {
         authenticationService = _authenticationService_;
         identityService = _identityService_;
+        restConfigService = _restConfigService_;
 
         $httpBackend = _$httpBackend_;
         $controller = _$controller_;
@@ -56,7 +62,7 @@ describe('The authentication module, ', function () {
 
             spyOn(authenticationService, 'authenticate');
             spyOn(authenticationService, 'isAuthenticated').andReturn($q.when(true));
-            spyOn(authenticationService, 'clear');
+            spyOn(authenticationService, 'signOut');
         });
 
 
@@ -92,9 +98,10 @@ describe('The authentication module, ', function () {
             spyOn(identityService, 'clear').andReturn($q.when(true));
         });
 
-        it('should broadcast the auth.logout event when clear is called', function () {
+        it('should broadcast the auth.logout event when signOut is called', function () {
+            $httpBackend.expectDELETE(logoutOperation).respond(200);
 
-            authenticationService.clear();
+            authenticationService.signOut();
             $rootScope.$apply();
 
             expect($cookies.currentUserId).toBeUndefined();

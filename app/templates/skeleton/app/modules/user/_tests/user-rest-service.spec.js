@@ -53,7 +53,7 @@ describe('The userRestService, ', function () {
 
     it('should implement a default service', function () {
         userRestService.default();
-        $httpBackend.expectGET(userOperationUrl + '/0').respond();
+        $httpBackend.expectGET(userOperationUrl + '/-1').respond();
         $httpBackend.flush();
     });
 

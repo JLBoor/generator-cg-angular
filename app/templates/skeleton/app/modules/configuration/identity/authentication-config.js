@@ -22,10 +22,10 @@ angular.module('configuration.identity.authentication', ['configuration.identity
 
         return {
 
-            clear: function () {
+            signOut: function() {
+                $resource(restConfigService.getLogoutOperation()).delete();
                 $http.defaults.headers.common.Authorization = 'Basic ';
-                _logoutEvent();
-                identityService.clear();
+                _logoutEvent();                
             },
 
             authenticate: function (username, password, callback) {

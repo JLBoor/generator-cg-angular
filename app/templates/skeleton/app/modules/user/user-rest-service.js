@@ -3,6 +3,7 @@ angular.module('user')
     .service('userRestService', function($resource, restConfigService) {
 
         var User = $resource(restConfigService.getOperation('/users/:id'), { id: '@id' }, { 'update': { method:'PUT' } });
+        var newEntityId = restConfigService.getNewEntityId();
 
         return {
 
@@ -27,7 +28,7 @@ angular.module('user')
             },
 
             default: function() {
-                return User.get({id: 0}).$promise
+                return User.get({id: newEntityId}).$promise
                     .then(function(user) {
                         delete user.id;
                         return user;

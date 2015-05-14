@@ -62,7 +62,7 @@
         "ACTION_CANCEL": "annuler",
         "ACTION_UPDATE": "Mettre à jour",
         "ACTION_DELETE": "Supprimer",
-        "INVALID_IMAGE_FILE": "Les fichiers doivent être les images valides , à moins de 10MB en taille."
+        "INVALID_IMAGE_FILE": "Les fichiers doivent être des images valides, inférieur à 10MB."
     },
 
     "USER": {

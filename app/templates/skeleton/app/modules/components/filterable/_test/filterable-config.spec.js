@@ -41,14 +41,17 @@ describe('The components.filterable module, ', function () {
             pageable.pageNumber = 5;
             pageable.pageSize = 8;
             var orderBy = "lastName";
-            pageable.setOrderByProperty(orderBy);
+            pageable.applyOrderByProperty(orderBy);
             var clientName = "clientName";
-            pageable.filterParamns.name = clientName;
+            var ascending = true;
+
+            pageable.filterParams.name = clientName;
 
             var expectedParamns = {
                 _pageNumber: pageable.pageNumber,
                 _pageSize: pageable.pageSize,
                 _orderBy: orderBy,
+                _ascending : ascending,
                 name: clientName
             };
             expect(pageable.toQuery()).toEqual(expectedParamns);

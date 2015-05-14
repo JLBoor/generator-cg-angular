@@ -9,14 +9,14 @@
 
 <form class="form-horizontal">
     <div class="col-md-5">
-        <input type="text" class="form-control" id="name" ng-model="filterParamns.name" ng-change="filterableUsers.filter()">
+        <input type="text" class="form-control" id="name" ng-model="filterParams.name" ng-change="filterableUsers.filter()">
     </div>
 </form>
 <table class="table table-hover">
     <thead>
         <tr>
-            <th class="col-md-5" translate>USER.PROPERTY_NAME</th>
-            <th class="col-md-5" translate>USER.PROPERTY_EMAIL</th>
+            <th class="col-md-5" ng-click="orderBy('name')"><span translate>USER.PROPERTY_NAME</span><span ng-class="orderedClass('name')" aria-hidden="true"></span></th>
+            <th class="col-md-5" ng-click="orderBy('email')"><span translate>USER.PROPERTY_EMAIL</span><span ng-class="orderedClass('email')"  aria-hidden="true"></span></th>
             <th class="col-md-2" class="text-right" translate>COMMON.HEADER.ACTIONS</th>
         </tr>
     </thead>

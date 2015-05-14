@@ -8,10 +8,10 @@ angular.module('configuration.identity', ['configuration.rest', 'ngCookies', 'ui
             $scope.identity = identityService.getIdentity();
         });
 
-        $scope.signOut = function () {
-            $resource(restConfigService.getLogoutOperation()).delete();
+        $scope.signOut = function () {            
             delete $scope.identity;
-            authenticationService.clear();
+            authenticationService.signOut();
+            identityService.clear();
         };
     })
 

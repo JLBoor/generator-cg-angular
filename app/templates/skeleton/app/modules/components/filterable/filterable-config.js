@@ -27,20 +27,35 @@ angular.module('components.filterable', ['ui.bootstrap.pagination'])
             this.boundaryLinks = filterableConstants.boundaryLinks;
             this.directionLinks = filterableConstants.directionLinks;
             this.orderByProperty = null;
-            this.filterParamns = {};
+            this.isAscending = true;
+            this.filterParams = {};
         };
 
-        Filterable.prototype.setOrderByProperty = function(orderBy) {
-            this.orderByProperty = orderBy;
+        Filterable.prototype.applyOrderByProperty = function(orderBy) {
+            if (this.orderByProperty === orderBy) {
+                this.isAscending = !this.isAscending;
+            } else {
+                this.isAscending = true;
+                this.orderByProperty = orderBy;            
+            }
+        };
+
+        Filterable.prototype.isOrderedBy = function(orderBy) {
+            return this.orderByProperty === orderBy;
+        };
+
+        Filterable.prototype.isAscending = function() {
+            return this.isAscending;
         };
 
         Filterable.prototype.toQuery = function() {
 
-            this.filterParamns._pageNumber = this.pageNumber;
-            this.filterParamns._pageSize = this.pageSize;
-            this.filterParamns._orderBy = this.orderByProperty;
+            this.filterParams._pageNumber = this.pageNumber;
+            this.filterParams._pageSize = this.pageSize;
+            this.filterParams._orderBy = this.orderByProperty;
+            this.filterParams._ascending = this.isAscending;
 
-            return this.filterParamns;
+            return this.filterParams;
         };
 
         Filterable.prototype.filter = function(showPage) {

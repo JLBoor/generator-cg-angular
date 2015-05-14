@@ -1,5 +1,5 @@
 angular.module('company')
-    .service('companyRestService', function($http, restConfigService) {
+    .service('companyRestService', ['$http', 'Upload', 'restConfigService' , function($http, Upload, restConfigService) {
 
         var listOperation = restConfigService.getOperation('/companies');
 
@@ -21,12 +21,13 @@ angular.module('company')
                 });
             },
 
-            create: function(company) {
-                return $http.post(listOperation, company);
-            },
-
-            update: function(company) {
-                return $http.put(listOperation + '/' + company.id, company);
+            createOrUpdate: function (company, imageFile, isEditing) {
+                return Upload.upload({
+                    url: isEditing ? (listOperation + '/' + company.id) : listOperation,
+                    method: isEditing ? 'PUT' : 'POST',
+                    file: imageFile,
+                    data: company
+                });
             },
 
             delete: function(company) {
@@ -39,4 +40,4 @@ angular.module('company')
                 };
             }
         };
-    });
+    }]);

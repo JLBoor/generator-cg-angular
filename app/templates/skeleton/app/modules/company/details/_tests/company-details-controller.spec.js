@@ -46,8 +46,7 @@ describe('The companyDetailsController, ', function () {
     describe('when an rest call is made, should transition to the company list and', function () {
 
         beforeEach(inject(function(_$q_) {
-            spyOn(companyRestService, 'create').andReturn(_$q_.when());
-            spyOn(companyRestService, 'update').andReturn(_$q_.when());
+            spyOn(companyRestService, 'createOrUpdate').andReturn(_$q_.when());
             spyOn(companyRestService, 'delete').andReturn(_$q_.when());
 
             spyOn($state, 'go');
@@ -63,17 +62,21 @@ describe('The companyDetailsController, ', function () {
             expect($scope.company).toBeUndefined();
 
             $scope.company = {name: 'h'};
+            $scope.image = "image";
+            $scope.isEditing = false;
             $scope.createOrUpdate();
 
-            expect(companyRestService.create).toHaveBeenCalledWith($scope.company);
+            expect(companyRestService.createOrUpdate).toHaveBeenCalledWith($scope.company, "image", false);
         });
 
         it('should update the company when it is an existing company', function () {
             _companyDetailsController(company);
 
             $scope.company.name = 'a';
+            $scope.image = "image";
+            $scope.isEditing = true;
             $scope.createOrUpdate();
-            expect(companyRestService.update).toHaveBeenCalledWith($scope.company);
+            expect(companyRestService.createOrUpdate).toHaveBeenCalledWith($scope.company, "image", true);
         });
 
         it('should delete the company', function () {

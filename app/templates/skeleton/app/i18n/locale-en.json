@@ -54,13 +54,15 @@
         "PROPERTY_ID": "Company Id",
         "PROPERTY_ADDRESS": "Address",
         "PROPERTY_PHONE": "Phone",
+        "PROPERTY_IMAGE": "Image",
         "PROPERTY_LASTNAME": "Lastname",
         "PROPERTY_FIRSTNAME": "Firstname",
 
         "ACTION_CREATE": "Create",
         "ACTION_CANCEL": "cancel",
         "ACTION_UPDATE": "Update",
-        "ACTION_DELETE": "Delete"
+        "ACTION_DELETE": "Delete",
+        "INVALID_IMAGE_FILE": "Files must be valid images, less than 10MB in size."
     },
 
     "USER": {

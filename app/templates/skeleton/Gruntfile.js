@@ -102,6 +102,18 @@ module.exports = function (grunt) {
             }
         },
         less: {
+            dev: {
+                options: {
+                    paths: ["app/less/"],
+                    modifyVars: {
+                        "fa-font-path": "'fonts/font-awesome/'",
+                        "icon-font-path": "'fonts/bootstrap/'"
+                    }
+                },
+                files: {
+                    "app/css/app.css": "app/less/app.less"
+                }
+            },
             production: {
                 options: {
                     paths: ["app/less/"],

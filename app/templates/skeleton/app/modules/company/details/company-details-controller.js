@@ -6,6 +6,8 @@ angular.module('company')
 
         $scope.company = company;
         $scope.isEditing = company && company.id;
+        $scope.image = $scope.$rejectedFiles ? null : $scope.image;
+        $scope.imageSizeLimit = 1024*1024*10;
 
         $scope.delete = function() {
             companyRestService.delete($scope.company)
@@ -13,7 +15,7 @@ angular.module('company')
         };
 
         $scope.createOrUpdate = function() {
-            companyRestService[$scope.isEditing ? 'update' : 'create']($scope.company)
+            companyRestService.createOrUpdate($scope.company, $scope.image, $scope.isEditing)
                 .then(_backToList);
         };
 

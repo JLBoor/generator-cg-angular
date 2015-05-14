@@ -54,13 +54,15 @@
         "PROPERTY_ID": "Id",
         "PROPERTY_ADDRESS": "Adresse",
         "PROPERTY_PHONE": "Téléphone",
+        "PROPERTY_IMAGE": "Image",
         "PROPERTY_LASTNAME": "Nom",
         "PROPERTY_FIRSTNAME": "Prénom",
 
         "ACTION_CREATE": "Créer",
         "ACTION_CANCEL": "annuler",
         "ACTION_UPDATE": "Mettre à jour",
-        "ACTION_DELETE": "Supprimer"
+        "ACTION_DELETE": "Supprimer",
+        "INVALID_IMAGE_FILE": "Les fichiers doivent être des images valides, inférieur à 10MB."
     },
 
     "USER": {

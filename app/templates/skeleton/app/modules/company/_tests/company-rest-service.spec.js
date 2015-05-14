@@ -33,15 +33,15 @@ describe('The companyRestService, ', function () {
         $httpBackend.flush();
     });
 
-    it('should implement a create service', function () {
-        companyRestService.create(company);
-        $httpBackend.expectPOST(expectedOperationUrl, company).respond();
+    it('should implement a createOrUpdate service that creates', function () {
+        companyRestService.createOrUpdate(company, null, false);
+        $httpBackend.expectPOST(expectedOperationUrl).respond();
         $httpBackend.flush();
     });
 
-    it('should implement a update service', function () {
-        companyRestService.update(company);
-        $httpBackend.expectPUT(expectedOperationUrl + '/'  + company.id, company).respond();
+    it('should implement a createOrUpdate service that updates', function () {
+        companyRestService.createOrUpdate(company, null, true);
+        $httpBackend.expectPUT(expectedOperationUrl + '/'  + company.id).respond();
         $httpBackend.flush();
     });
 
